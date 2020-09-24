@@ -8,3 +8,9 @@
   --banner-background: #1e88e5;
   --banner-background-darker: #1976d2;
 }
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}

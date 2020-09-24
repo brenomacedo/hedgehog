@@ -1,0 +1,43 @@
+.bar-container {
+    height: 25px;
+    background-color: #6200ea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bar-options {
+    display: flex;
+    height: 100%;
+}
+
+.bar-option {
+    width: 30px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bar-option:hover {
+    background-color: #b388ff;
+}
+
+.bar-option.close:hover {
+    background-color: red;
+}
+
+.bar-title {
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    text-align: center;
+    padding-left: 5px;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
+    flex: 1;
+    height: 100%;
+    text-align: left;
+    line-height: 25px;
+}

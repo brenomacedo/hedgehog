@@ -10,13 +10,32 @@ function createWindow () {
     height: 600,
     webPreferences: {
       nodeIntegration: true
-    }
+    },
+    minHeight: 600,
+    minWidth: 800,
+    titleBarStyle: "hidden",
+    frame: false
   })
 
   // e carrega o arquivo index.html do seu aplicativo.
   win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, "../build/index.html")}`)
 
   // Abrir o DevTools (aba de ferramentas para desenvolvedores).
+  ipcMain.on('resize', (event, args) => {
+    if(args) {
+      win.setFullScreen(false)
+    } else {
+      win.setFullScreen(true)
+    }
+  })
+
+  ipcMain.on('min', () => {
+    win.minimize()
+  })
+
+  ipcMain.on('close', () => {
+    win.close()
+  })
   
 }
 
