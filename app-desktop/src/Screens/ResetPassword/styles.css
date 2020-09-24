@@ -1,5 +1,6 @@
 .login-container {
     display: flex;
+    flex-direction: row-reverse;
     flex: 1;
 }
 
@@ -96,4 +97,11 @@
     max-width: 200px;
     margin-top: 10px;
     line-height: 20px;
+}
+
+.arrow-back {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    cursor: pointer;
 }

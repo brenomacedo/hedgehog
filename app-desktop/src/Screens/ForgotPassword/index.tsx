@@ -1,18 +1,19 @@
 import React from 'react'
-import { FiMail, FiKey } from 'react-icons/fi'
+import { FiMail, FiKey, FiUser, FiArrowLeft } from 'react-icons/fi'
 import './styles.css'
 
-const Login = () => {
+const ForgotPassword = () => {
     return (
         <div className="login-container">
             <div className="login-banner-container">
                 <div className="login-banner-logo"></div>
                 <h2>Welcome to hedgehog!</h2>
-                <p>Come with us and listen to your favorite musics!</p>
+                <p>You can reset your password here!</p>
             </div>
             <div className="login-form-container">
-                <h2>Login</h2>
-                <p>Hey! Lets get started!</p>
+                <FiArrowLeft className="arrow-back" size={25} color='black' />
+                <h2>Reset password</h2>
+                <p>Don't worry! We will solve your problem!</p>
                 <form className="login-form">
                     <div style={{
                         position: 'relative'
@@ -26,25 +27,11 @@ const Login = () => {
                             <FiMail size={15} color='black' />
                         </div>
                     </div>
-                    <div style={{
-                        position: 'relative'
-                    }} className="input-container">
-                        <input type="password" placeholder="Password" />
-                        <div style={{
-                            position: 'absolute',
-                            top: 10,
-                            left: 12
-                        }} className="input-icon">
-                            <FiKey size={15} color='black' />
-                        </div>
-                    </div>
-                    <button type="submit">Login</button>
-                    <p>Create an account</p>
-                    <p>I forgot my password</p>
+                    <button type="submit">Send an email verification</button>
                 </form>
             </div>
         </div>
     )
 }
 
-export default Login
+export default ForgotPassword
