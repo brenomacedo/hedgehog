@@ -23,9 +23,9 @@ function createWindow () {
   // Abrir o DevTools (aba de ferramentas para desenvolvedores).
   ipcMain.on('resize', (event, args) => {
     if(args) {
-      win.setFullScreen(false)
+      win.unmaximize()
     } else {
-      win.setFullScreen(true)
+      win.maximize()
     }
   })
 

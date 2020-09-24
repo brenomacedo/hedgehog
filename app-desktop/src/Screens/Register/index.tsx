@@ -1,5 +1,6 @@
 import React from 'react'
 import { FiMail, FiKey, FiUser } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 import './styles.css'
 
 const Register = () => {
@@ -63,7 +64,7 @@ const Register = () => {
                         </div>
                     </div>
                     <button type="submit">Register</button>
-                    <p>I already have an account</p>
+                    <Link className="link-pointer" to="/">I already have an account</Link>
                 </form>
             </div>
         </div>

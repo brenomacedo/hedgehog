@@ -1,6 +1,6 @@
-.login-container {
+.login-container-forgotpassword {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     flex: 1;
 }
 

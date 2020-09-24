@@ -97,3 +97,11 @@
     margin-top: 10px;
     line-height: 20px;
 }
+
+.link-pointer {
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Kumbh Sans', sans-serif;
+    color: black;
+    margin-top: 10px;
+}

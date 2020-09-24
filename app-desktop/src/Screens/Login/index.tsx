@@ -1,5 +1,6 @@
 import React from 'react'
 import { FiMail, FiKey } from 'react-icons/fi'
+import { Link } from 'react-router-dom'
 import './styles.css'
 
 const Login = () => {
@@ -39,8 +40,8 @@ const Login = () => {
                         </div>
                     </div>
                     <button type="submit">Login</button>
-                    <p>Create an account</p>
-                    <p>I forgot my password</p>
+                    <Link to='/register' className="link-pointer">Create an account</Link>
+                    <Link to='/forgotpassword' className="link-pointer">I forgot my password</Link>
                 </form>
             </div>
         </div>
