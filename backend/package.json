@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
     "@prisma/cli": "^2.7.1",
+    "@types/express": "^4.17.8",
     "ts-node": "^9.0.0",
     "ts-node-dev": "^1.0.0-pre.63",
     "typescript": "^4.0.3"
   },
+  "dependencies": {
+    "@prisma/client": "^2.7.1"
+  },
   "scripts": {
     "start:dev": "ts-node-dev src/index.ts --respawn --transpile-only --ignore-watch node_modules",
-    "tables:run": "psql -h localhost -d hedgehog -U postgres -f prisma/schema.sql"
+    "tables:run": "psql -h localhost -U postgres -d hedgehog -f prisma/schema.sql"
   }
 }
