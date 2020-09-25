@@ -1,0 +1,53 @@
+.profile-container {
+    background-image: url('/background.png');
+    background-position: center;
+    background-size: cover;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.profile-name {
+    font-family: 'Kumbh Sans', sans-serif;
+    color: white;
+    margin-top: 20px;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.profile-form-input {
+    position: relative;
+}
+
+.profile-form-input input {
+    outline: 0;
+    font-family: 'Kumbh Sans', sans-serif;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    width: 300px;
+    padding: 12px 0;
+    padding-left: 36px;
+    font-size: 18px;
+    margin-top: 12px;
+    color: white;
+}
+
+.profile-form-input-icon {
+    position: absolute;
+    top: 20px;
+    left: 8px;
+}

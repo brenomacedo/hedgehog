@@ -15,7 +15,7 @@ const ResetPassword = () => {
                 <p>With the token, you can reset you password!</p>
             </div>
             <div className="login-form-container">
-            <FiArrowLeft onClick={() => console.log('hi')} className="arrow-back" size={25} color='black' />
+            <FiArrowLeft onClick={() => console.log('hi')} className="arrow-back" size={25} color='white' />
                 <h2>Reset password</h2>
                 <p>Don't worry! We will solve your problem!</p>
                 <form className="login-form">

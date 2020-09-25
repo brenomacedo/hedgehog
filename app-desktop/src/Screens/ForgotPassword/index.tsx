@@ -15,7 +15,7 @@ const ForgotPassword = () => {
                 <p>You can reset your password here!</p>
             </div>
             <div className="login-form-container">
-                <FiArrowLeft onClick={() => history.push('/')} className="arrow-back" size={25} color='black' />
+                <FiArrowLeft onClick={() => history.push('/')} className="arrow-back" size={25} color='white' />
                 <h2>Reset password</h2>
                 <p>Don't worry! We will solve your problem!</p>
                 <form className="login-form">
