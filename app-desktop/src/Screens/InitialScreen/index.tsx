@@ -20,8 +20,14 @@ const InitialScreen = () => {
                 </div>
                 <div className="initial-main">
                     <form className="initial-search-container">
-                        <input placeholder="Search any music" required type="text" className="initial-search"/>
-                        <button className="initial-search-button"><FiSearch size={10} color='white' /></button>
+                        <div className="initial-profile">
+                            <div className="initial-profile-pic"></div>
+                            <p className="initial-profile-name">Breno Macêdo</p>
+                        </div>
+                        <div>
+                            <input placeholder="Search any music" required type="text" className="initial-search"/>
+                            <button className="initial-search-button"><FiSearch size={10} color='white' /></button>
+                        </div>
                     </form>
                     <Playlist />
                 </div>

@@ -80,9 +80,28 @@
 .initial-search-container {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     height: 60px;
     padding-right: 20px;
+}
+
+.initial-profile {
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.initial-profile-name {
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+    margin-left: 10px;
+}
+
+.initial-profile-pic {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 15px;
 }
 
 .initial-search {
