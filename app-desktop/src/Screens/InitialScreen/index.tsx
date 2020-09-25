@@ -30,10 +30,19 @@ const InitialScreen = () => {
                 <p className="initial-playlist-playing-now">
                     Linkin Park - Figure 09
                 </p>
-                <div className="initial-playlist-controls">
-                    <FiSkipBack className="initial-playlist-icon" size={20} color='white' />
-                    <FiPlayCircle className="initial-playlist-icon" size={25} color='white' />
-                    <FiSkipForward className="initial-playlist-icon" size={20} color='white' />
+                <div className="initial-playlist-controls-and-bar">
+                    <div className="initial-playlist-controls">
+                        <FiSkipBack className="initial-playlist-icon" size={20} color='white' />
+                        <FiPlayCircle className="initial-playlist-icon" size={25} color='white' />
+                        <FiSkipForward className="initial-playlist-icon" size={20} color='white' />
+                    </div>
+                    <div className="initial-playlist-progress-bar">
+                        <p className="initial-playlist-progress-bar-info">1:50</p>
+                        <div className="initial-playlist-progress-bar-bar">
+                            <div className="initial-playlist-brogress-bar-ball"></div>
+                        </div>
+                        <p className="initial-playlist-progress-bar-info">3:52</p>
+                    </div>
                 </div>
                 <div className="initial-playlist-volume">
                     <div className="initial-playlist-volume-ball"></div>

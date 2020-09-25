@@ -139,3 +139,43 @@
 .initial-content-title {
     color: white;
 }
+
+.initial-playlist-controls-and-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.initial-playlist-progress-bar {
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.initial-playlist-progress-bar-bar {
+    width: 200px;
+    height: 4px;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 20px;
+    background-color: var(--banner-background);
+    margin: 0 15px;
+    position: relative;
+    bottom: 2px;
+}
+
+.initial-playlist-progress-bar-info {
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 10px;
+}
+
+.initial-playlist-brogress-bar-ball {
+    background-color: white;
+    width: 6px;
+    height: 6px;
+    position: absolute;
+    top: -1px;
+    right: 0;
+}
