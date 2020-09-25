@@ -1,7 +1,7 @@
 .initial-container {
     flex: 1;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     background-color: var(--background-gray);
 }
 
@@ -42,5 +42,66 @@
     font-family: 'Kumbh Sans', sans-serif;
     position: absolute;
     left: 45px;
+}
 
+.initial-navigation {
+    flex: 1;
+    display: flex;
+    background-color: white;
+}
+
+.initial-playlist-bar {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--banner-background);
+    width: 220px;
+    height: calc(100vh - 105px);
+    padding: 20px;
+}
+
+.initial-main {
+    background-color: var(--background-gray);
+    flex: 1;
+    height: calc(100vh - 105px);
+}
+
+.initial-playlist-bar-my {
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+}
+
+.initial-playlist-list {
+    flex: 1;
+}
+
+.initial-search-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px;
+}
+
+.initial-search {
+    width: 150px;
+    height: 25px;
+    border-radius: 50px;
+    border: 0;
+    outline: none;
+    padding-left: 10px;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-size: 12px;
+    margin-right: 10px;
+}
+
+.initial-search-button {
+    height: 25px;
+    width: 25px;
+    border-radius: 20px;
+    background-color: var(--banner-background);
+    border: 0;
+    outline: none;
+    cursor: pointer;
 }

@@ -1,12 +1,26 @@
 import React from 'react'
-import { FiSkipBack, FiSkipForward, FiPause, FiPlayCircle, FiPauseCircle } from 'react-icons/fi'
+import { FiSkipBack, FiSkipForward, FiPlayCircle, FiPauseCircle, FiPlusCircle, FiSearch } from 'react-icons/fi'
 import './styles.css'
 
 const InitialScreen = () => {
     return (
         <div className="initial-container">
             <div className="initial-navigation">
-                
+                <div className="initial-playlist-bar">
+                    <p className="initial-playlist-bar-my">My Playlists</p>
+                    <div className="initial-playlist-list">
+
+                    </div>
+                    <p style={{ cursor: 'pointer' }} className="initial-playlist-bar-my">
+                        Create a playlist
+                    <FiPlusCircle style={{ marginLeft: 10 }} color='white' size={20} /></p>
+                </div>
+                <div className="initial-main">
+                    <form className="initial-search-container">
+                        <input placeholder="Search any music" required type="text" className="initial-search"/>
+                        <button className="initial-search-button"><FiSearch size={10} color='white' /></button>
+                    </form>
+                </div>
             </div>
             <div className="initial-playlist">
                 <p className="initial-playlist-playing-now">
