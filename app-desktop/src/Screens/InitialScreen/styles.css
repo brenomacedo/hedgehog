@@ -81,7 +81,8 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 20px;
+    height: 60px;
+    padding-right: 20px;
 }
 
 .initial-search {
@@ -104,4 +105,37 @@
     border: 0;
     outline: none;
     cursor: pointer;
+}
+
+.initial-content {
+    height: calc(100% - 60px);
+    padding: 20px;
+    flex-wrap: wrap;
+    overflow: auto;
+    z-index: 1;
+}
+
+.initial-content-title {
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+    padding: 10px;
+    padding-left: 25px;
+}
+
+.initial-content-musics {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.initial-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.initial-content::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.initial-content-title {
+    color: white;
 }

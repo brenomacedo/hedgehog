@@ -1,5 +1,6 @@
 import React from 'react'
 import { FiSkipBack, FiSkipForward, FiPlayCircle, FiPauseCircle, FiPlusCircle, FiSearch } from 'react-icons/fi'
+import Music from '../../Components/Music'
 import './styles.css'
 
 const InitialScreen = () => {
@@ -20,6 +21,19 @@ const InitialScreen = () => {
                         <input placeholder="Search any music" required type="text" className="initial-search"/>
                         <button className="initial-search-button"><FiSearch size={10} color='white' /></button>
                     </form>
+                    <div className="initial-content">
+                        <h2 className="initial-content-title">Showing last updated musics</h2>
+                        <div className="initial-content-musics">
+                            <Music />
+                            <Music />
+                            <Music />
+                            <Music />
+                            <Music />
+                            <Music />
+                            <Music />
+                            <Music />
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="initial-playlist">

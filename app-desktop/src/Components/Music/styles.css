@@ -1,0 +1,25 @@
+.music-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.music-thumb {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+}
+
+.music-title {
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+    margin-top: 20px;
+}
+
+.music-author {
+    font-family: 'Kumbh Sans', sans-serif;
+    color: white;
+    font-weight: 300;
+    margin-top: 10px;
+}
