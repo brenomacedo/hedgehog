@@ -1,0 +1,53 @@
+.playlist-container {
+    height: calc(100% - 60px);
+    overflow: auto;
+    padding: 20px;
+    padding-right: 40px;
+}
+
+.playlist-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.playlist-container::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.playlist-item {
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    position: relative;
+}
+
+.playlist-music-author {
+    font-family: 'Kumbh Sans', sans-serif;
+    color: white;
+    margin-left: 5px;
+}
+
+.playlist-music-name {
+    font-family: 'Kumbh Sans', sans-serif;
+    color: white;
+}
+
+.playlist-music-play {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+
+.playlist-music-duration {
+    position: absolute;
+    right: 80px;
+    font-family: 'Kumbh Sans', sans-serif;
+    color: white;
+}
+
+.playlist-music-playing-now {
+    position: absolute;
+    right: 160px;
+    font-family: 'Kumbh Sans', sans-serif;
+    color: white;
+}
