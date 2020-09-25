@@ -7,6 +7,8 @@
 :root {
   --banner-background: #1e88e5;
   --banner-background-darker: #1976d2;
+  --background-gray: #212121;
+  --background-gray-lighter: #424242;
 }
 
 .App {

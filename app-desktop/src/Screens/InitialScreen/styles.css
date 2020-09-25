@@ -1,0 +1,46 @@
+.initial-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: var(--background-gray);
+}
+
+.initial-playlist {
+    height: 80px;
+    background-color: var(--background-gray-lighter);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.initial-playlist-icon {
+    margin: 0 15px;
+    cursor: pointer;
+}
+
+.initial-playlist-volume {
+    width: 100px;
+    height: 5px;
+    background-color: var(--banner-background);
+    border-radius: 5px;
+    position: absolute;
+    right: 45px;
+}
+
+.initial-playlist-volume-ball {
+    width: 7px;
+    height: 7px;
+    background-color: white;
+    position: absolute;
+    bottom: -1px;
+    cursor: pointer;
+    right: 1px;
+}
+
+.initial-playlist-playing-now {
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+    position: absolute;
+    left: 45px;
+
+}
