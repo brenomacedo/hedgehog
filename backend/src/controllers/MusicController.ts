@@ -7,7 +7,7 @@ class MusicController {
     
     async createMusic(req: Request, res: Response) {
 
-        const { name, author, avatar, url } = req.body
+        const { name, author, music: url, image: avatar } = req.body
 
         const music = await prisma.music.create({
             data: {

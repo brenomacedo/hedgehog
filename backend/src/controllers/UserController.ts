@@ -97,6 +97,12 @@ class UserController {
 
     }
 
+    async test(req: Request, res: Response) {
+        return res.json({
+            music: req.body
+        })
+    }
+
 }
 
 export default UserController

@@ -1,2 +1,5 @@
 node_modules
+uploads/music/*
+uploads/userimages/*
+uploads/musicimages/*
 *.log
