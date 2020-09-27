@@ -63,6 +63,40 @@ class UserController {
 
     }
 
+    async updateUser(req: Request, res: Response) {
+
+        const { id } = req.params
+        const { name, newPassword, currentPassword } = req.body
+
+        const user = await prisma.user.findOne({
+            where: {
+                id: Number(id)
+            }
+        })
+
+        if(!user) {
+            return res.status(500).json({ error: 'undefined user!' })
+        }
+
+        if(!await bcrypt.compare(currentPassword, user.password)) {
+            return res.status(500).json({ error: 'incorrect password!' })
+        }
+
+        const password = await bcrypt.hash(newPassword, 10)
+
+        const updatedUser = await prisma.user.update({
+            where: {
+                id: Number(id)
+            },
+            data: {
+                name, password
+            }
+        })
+
+        return res.status(200).json({ ...updatedUser, password: undefined })
+
+    }
+
 }
 
 export default UserController
