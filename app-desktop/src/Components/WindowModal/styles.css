@@ -1,0 +1,15 @@
+.windowModal {
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.windowBox {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    position: absolute;
+}

@@ -6,14 +6,11 @@ const InitialContent = () => {
         <div className="initial-content">
             <h2 className="initial-content-title">Showing last updated musics</h2>
             <div className="initial-content-musics">
-                <Music />
-                <Music />
-                <Music />
-                <Music />
-                <Music />
-                <Music />
-                <Music />
-                <Music />
+                <Music id={1} />
+                <Music id={2} />
+                <Music id={3} />
+                <Music id={4} />
+                
             </div>
         </div>
     )

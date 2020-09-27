@@ -7,7 +7,7 @@ class MusicController {
     
     async createMusic(req: Request, res: Response) {
 
-        const { name, author, music: url, image: avatar } = req.body
+        const { name, author, music: url, image: avatar, playlistId } = req.body
 
         const music = await prisma.music.create({
             data: {
@@ -15,7 +15,7 @@ class MusicController {
                     create: {
                         Playlist: {
                             connect: {
-                                id: 1
+                                id: Number(playlistId)
                             }
                         }
                     }

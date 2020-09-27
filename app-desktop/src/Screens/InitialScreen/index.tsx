@@ -1,37 +1,51 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FiSkipBack, FiSkipForward, FiPlayCircle, FiPauseCircle, FiPlusCircle, FiSearch } from 'react-icons/fi'
 import InitialContent from '../../Components/InitialContent'
 import Music from '../../Components/Music'
 import Playlist from '../../Components/Playlist'
+import WindowModal from '../../Components/WindowModal'
+import WindowContext from '../../Contexts/WindowContext'
 import './styles.css'
 
 const InitialScreen = () => {
-    return (
-        <div className="initial-container">
-            <div className="initial-navigation">
-                <div className="initial-playlist-bar">
-                    <p className="initial-playlist-bar-my">My Playlists</p>
-                    <div className="initial-playlist-list">
 
+    const [modalOpened, setModalOpened] = useState(false)
+    const [offset, setOffset] = useState({ x: 0, y: 0 })
+    const [musicId, setMusicId] = useState(0)
+
+    return (
+        
+        <div className="initial-container">
+            <WindowContext.Provider value={{ modalOpened, offset, setModalOpened,
+                setOffset, musicId, setMusicId }}>
+                <div className="initial-navigation">
+                    <div className="initial-playlist-bar">
+                        <p className="initial-playlist-bar-my">My Playlists</p>
+                        <div className="initial-playlist-list">
+
+                        </div>
+                        <p style={{ cursor: 'pointer' }} className="initial-playlist-bar-my">
+                            Create a playlist
+                        <FiPlusCircle style={{ marginLeft: 10 }} color='white' size={20} /></p>
                     </div>
-                    <p style={{ cursor: 'pointer' }} className="initial-playlist-bar-my">
-                        Create a playlist
-                    <FiPlusCircle style={{ marginLeft: 10 }} color='white' size={20} /></p>
+                    <div className="initial-main">
+                        <form className="initial-search-container">
+                            <div className="initial-profile">
+                                <div className="initial-profile-pic"></div>
+                                <p className="initial-profile-name">Breno Macêdo</p>
+                            </div>
+                            <div>
+                                <input placeholder="Search any music" required type="text" className="initial-search"/>
+                                <button className="initial-search-button"><FiSearch size={10} color='white' /></button>
+                            </div>
+                        </form>
+                        <InitialContent />
+                    </div>
                 </div>
-                <div className="initial-main">
-                    <form className="initial-search-container">
-                        <div className="initial-profile">
-                            <div className="initial-profile-pic"></div>
-                            <p className="initial-profile-name">Breno Macêdo</p>
-                        </div>
-                        <div>
-                            <input placeholder="Search any music" required type="text" className="initial-search"/>
-                            <button className="initial-search-button"><FiSearch size={10} color='white' /></button>
-                        </div>
-                    </form>
-                    <Playlist />
-                </div>
-            </div>
+                {modalOpened ? (
+                    <WindowModal />
+                ) : false}
+            </WindowContext.Provider>
             <div className="initial-playlist">
                 <p className="initial-playlist-playing-now">
                     Linkin Park - Figure 09
@@ -55,6 +69,7 @@ const InitialScreen = () => {
                 </div>
             </div>
         </div>
+
     )
 }
 
