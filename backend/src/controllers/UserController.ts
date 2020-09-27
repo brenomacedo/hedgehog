@@ -20,7 +20,7 @@ class UserController {
             }
         })
 
-        return res.status(201).json(user)
+        return res.status(201).json({ ...user, password: undefined })
     }
 
     async authUser(req: Request, res: Response) {
@@ -29,7 +29,7 @@ class UserController {
 
         const user = await prisma.user.findOne({
             where: {
-                email: req.body.email
+                email
             }
         })
 
@@ -37,13 +37,30 @@ class UserController {
             return res.status(500).json({ error: "Email or password incorrects!" })
         }
 
-        if(!await bcrypt.compare(req.body.password, user.password)) {
+        if(!await bcrypt.compare(password, user.password)) {
             return res.status(500).json({ error: "Email or password incorrects!" })
         }
 
         const token = jwt.sign({ id: user.id }, key, { expiresIn: 86400 })
 
-        return res.status(200).json({ user, token })
+        return res.status(200).json({ user: {...user, password: undefined }, token })
+    }
+
+    async updateUserImage(req: Request, res: Response) {
+    
+        const { id } = req.params
+        
+        const user = await prisma.user.update({
+            where: {
+                id: Number(id)
+            },
+            data: {
+                avatar: req.body.filename
+            }
+        })
+
+        return res.status(200).json({ ...user, password: undefined })
+
     }
 
 }

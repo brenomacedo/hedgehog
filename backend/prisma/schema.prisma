@@ -11,7 +11,7 @@ model Music {
   id              Int               @default(autoincrement()) @id
   name            String
   author          String
-  avatar          String
+  avatar          String            @default("default-music.png")
   url             String
   PlaylistToMusic PlaylistToMusic[]
 }
