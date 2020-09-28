@@ -14,7 +14,10 @@ const Music: FC<IMusicProps> = ({ id }) => {
             
             Window.setModalOpened && Window.setModalOpened(true)
             
-            Window.setOffset && Window.setOffset({ x: e.pageX, y: e.pageY })
+            Window.setOffsetX && Window.setOffsetX(e.pageX)
+            Window.setOffsetY && Window.setOffsetY(e.pageY)
+
+            
             
             Window.setMusicId && Window.setMusicId(id)
             
@@ -25,7 +28,7 @@ const Music: FC<IMusicProps> = ({ id }) => {
     const musicRef = useRef<HTMLDivElement>(null)
 
     const handleClick = () => {
-        console.log(Window.musicId)
+        
     }
 
     return (

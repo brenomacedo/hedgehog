@@ -9,6 +9,7 @@
   --banner-background-darker: #1976d2;
   --background-gray: #212121;
   --background-gray-lighter: #424242;
+  --background-gray-lighter-than: #616161;
 }
 
 .App {

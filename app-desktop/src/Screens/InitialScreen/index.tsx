@@ -10,14 +10,15 @@ import './styles.css'
 const InitialScreen = () => {
 
     const [modalOpened, setModalOpened] = useState(false)
-    const [offset, setOffset] = useState({ x: 0, y: 0 })
+    const [offsetX, setOffsetX] = useState(0)
+    const [offsetY, setOffsetY] = useState(0)
     const [musicId, setMusicId] = useState(0)
 
     return (
         
         <div className="initial-container">
-            <WindowContext.Provider value={{ modalOpened, offset, setModalOpened,
-                setOffset, musicId, setMusicId }}>
+            <WindowContext.Provider value={{ modalOpened, offsetX, setModalOpened,
+                setOffsetX, musicId, setMusicId, offsetY, setOffsetY }}>
                 <div className="initial-navigation">
                     <div className="initial-playlist-bar">
                         <p className="initial-playlist-bar-my">My Playlists</p>

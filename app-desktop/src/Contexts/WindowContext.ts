@@ -3,8 +3,10 @@ import { createContext, Dispatch, SetStateAction } from 'react'
 interface IWindowContext {
     modalOpened: boolean
     setModalOpened: Dispatch<SetStateAction<boolean>> | null
-    offset: { x: number, y: number }
-    setOffset: Dispatch<SetStateAction<{ x: number, y: number }>> | null
+    offsetX:number
+    setOffsetX: Dispatch<SetStateAction<number>> | null
+    offsetY: number
+    setOffsetY: Dispatch<SetStateAction<number>> | null
     musicId: number
     setMusicId: Dispatch<SetStateAction<number>> | null
 }
@@ -12,8 +14,10 @@ interface IWindowContext {
 const WindowContext = createContext<IWindowContext>({
     modalOpened: false,
     setModalOpened: null,
-    offset: { x: 0, y: 0 },
-    setOffset: null,
+    offsetX: 0,
+    setOffsetX: null,
+    offsetY: 0,
+    setOffsetY: null,
     musicId: 0,
     setMusicId : null
 })

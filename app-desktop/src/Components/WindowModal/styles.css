@@ -8,8 +8,22 @@
 }
 
 .windowBox {
-    width: 100px;
-    height: 100px;
-    background-color: red;
     position: absolute;
+    background-color: var(--background-gray-lighter);
+    width: 200px;
+    -webkit-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 23px 0px rgba(0,0,0,0.75);
+}
+
+.windowBox-option {
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+}
+
+.windowBox-option:hover {
+    background-color: var(--background-gray-lighter-than);
 }
