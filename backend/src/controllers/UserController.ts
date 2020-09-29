@@ -97,10 +97,16 @@ class UserController {
 
     }
 
-    async test(req: Request, res: Response) {
-        return res.json({
-            music: req.body
+    async verifyToken(req: Request, res: Response) {
+
+        const user = await prisma.user.findOne({
+            where: {
+                id: req.body.userId
+            }
         })
+
+        return res.status(200).json({ ...user, password: undefined })
+        
     }
 
 }

@@ -1,8 +1,14 @@
 .music-container {
     display: flex;
+    padding: 10px;
     flex-direction: column;
     margin-left: 20px;
     margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.music-container:hover {
+    background-color: var(--background-gray-lighter);
 }
 
 .music-thumb {

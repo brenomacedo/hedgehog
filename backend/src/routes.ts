@@ -5,6 +5,7 @@ import UserController from './controllers/UserController'
 import multer from 'multer'
 import multerUserConfig from './config/multerUser'
 import multerMusicConfig from './config/multerMusic'
+import AuthMiddleware from './middlewares/auth'
 const routes = Router()
 
 const userController = new UserController()
@@ -13,6 +14,7 @@ const musicController = new MusicController()
 
 routes.post('/user/create', userController.createUser)
 routes.post('/user/auth', userController.authUser)
+routes.get('/user/token', AuthMiddleware, userController.verifyToken)
 routes.put('/user/update/image/:id', multer(multerUserConfig).single('file'), userController.updateUserImage)
 routes.put('/user/update/data/:id', userController.updateUser)
 routes.post('/playlist/create', playlistController.createPlaylist)

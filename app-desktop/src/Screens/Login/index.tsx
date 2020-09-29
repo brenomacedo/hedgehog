@@ -1,9 +1,29 @@
-import React from 'react'
+import React, { useCallback, useContext, useEffect, useRef } from 'react'
 import { FiMail, FiKey } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import UserContext from '../../Contexts/UserContext'
 import './styles.css'
 
 const Login = () => {
+
+    const emailRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
+
+    const User = useContext(UserContext)
+
+    const history = useHistory()
+
+    useEffect(() => {
+        if(User.isAuth) {
+            history.push('/home')
+        }
+    }, [User.isAuth])
+
+    const handleLogin = useCallback(() => {
+        console.log(emailRef.current?.value)
+        console.log(passwordRef.current?.value)
+    }, [])
+
     return (
         <div className="login-container">
             <div className="login-banner-container">
@@ -18,7 +38,7 @@ const Login = () => {
                     <div style={{
                         position: 'relative'
                     }} className="input-container">
-                        <input type="text" placeholder="Your email" />
+                        <input ref={emailRef} type="text" placeholder="Your email" />
                         <div style={{
                             position: 'absolute',
                             top: 10,
@@ -30,7 +50,7 @@ const Login = () => {
                     <div style={{
                         position: 'relative'
                     }} className="input-container">
-                        <input type="password" placeholder="Password" />
+                        <input ref={passwordRef} type="password" placeholder="Password" />
                         <div style={{
                             position: 'absolute',
                             top: 10,
@@ -39,7 +59,7 @@ const Login = () => {
                             <FiKey size={15} color='black' />
                         </div>
                     </div>
-                    <button type="submit">Login</button>
+                    <button onClick={handleLogin} type="submit">Login</button>
                     <Link to='/register' className="link-pointer">Create an account</Link>
                     <Link to='/forgotpassword' className="link-pointer">I forgot my password</Link>
                 </form>
