@@ -32,7 +32,8 @@ const Login = () => {
         }
     }, [User.isAuth])
 
-    const handleLogin = useCallback(async () => {
+    const handleLogin = async () => {
+
         try {
             const user = await api.post<IUserContext>('/user/auth', {
                 email: emailRef.current?.value,
@@ -46,12 +47,15 @@ const Login = () => {
             User.setAvatar && User.setAvatar(user.data.user.avatar)
             User.setToken && User.setToken(`Bearer ${user.data.token}`)
 
+            
+            
             history.push('/home')
             
         } catch {
             console.log('error')
         }
-    }, [])
+
+    }
 
     return (
         <div className="login-container">
