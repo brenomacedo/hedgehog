@@ -1,10 +1,23 @@
 import React, { useCallback, useContext, useEffect, useRef } from 'react'
 import { FiMail, FiKey } from 'react-icons/fi'
 import { Link, useHistory } from 'react-router-dom'
+import api from '../../api/api'
 import UserContext from '../../Contexts/UserContext'
 import './styles.css'
 
 const Login = () => {
+
+    interface IUser {
+        id: number
+        name: string
+        email: string
+        avatar: string
+    }
+
+    interface IUserContext {
+        user: IUser
+        token: string
+    }
 
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
@@ -19,9 +32,25 @@ const Login = () => {
         }
     }, [User.isAuth])
 
-    const handleLogin = useCallback(() => {
-        console.log(emailRef.current?.value)
-        console.log(passwordRef.current?.value)
+    const handleLogin = useCallback(async () => {
+        try {
+            const user = await api.post<IUserContext>('/user/auth', {
+                email: emailRef.current?.value,
+                password: passwordRef.current?.value
+            })
+
+            User.setIsAuth && User.setIsAuth(true)
+            User.setId && User.setId(user.data.user.id)
+            User.setName && User.setName(user.data.user.name)
+            User.setEmail && User.setEmail(user.data.user.email)
+            User.setAvatar && User.setAvatar(user.data.user.avatar)
+            User.setToken && User.setToken(`Bearer ${user.data.token}`)
+
+            history.push('/home')
+            
+        } catch {
+            console.log('error')
+        }
     }, [])
 
     return (

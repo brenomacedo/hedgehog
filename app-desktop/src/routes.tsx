@@ -19,11 +19,6 @@ const Routes = () => {
         avatar: string
     }
 
-    interface IUserContext {
-        user: IUser
-        token: string
-    }
-
     const User = useContext(UserContext)
 
     useEffect(() => {
@@ -44,6 +39,7 @@ const Routes = () => {
                 User.setName && User.setName(resp.data.name)
                 User.setEmail && User.setEmail(resp.data.email)
                 User.setAvatar && User.setAvatar(resp.data.avatar)
+                User.setToken && User.setToken(authorization)
             }).catch(err => {
 
             })
