@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FiSkipBack, FiSkipForward, FiPlayCircle, FiPauseCircle, FiPlusCircle, FiSearch } from 'react-icons/fi'
 import InitialContent from '../../Components/InitialContent'
 import Music from '../../Components/Music'
 import Playlist from '../../Components/Playlist'
 import WindowModal from '../../Components/WindowModal'
+import UserContext from '../../Contexts/UserContext'
 import WindowContext from '../../Contexts/WindowContext'
 import './styles.css'
 
@@ -13,6 +14,8 @@ const InitialScreen = () => {
     const [offsetX, setOffsetX] = useState(0)
     const [offsetY, setOffsetY] = useState(0)
     const [musicId, setMusicId] = useState(0)
+
+    const User = useContext(UserContext)
 
     return (
         
@@ -32,8 +35,10 @@ const InitialScreen = () => {
                     <div className="initial-main">
                         <form className="initial-search-container">
                             <div className="initial-profile">
-                                <div className="initial-profile-pic"></div>
-                                <p className="initial-profile-name">Breno Macêdo</p>
+                                <div className="initial-profile-pic" style={{
+                                    backgroundImage: `url("http://localhost:3333/userimages/${User.avatar}")`
+                                }}></div>
+                                <p className="initial-profile-name">{User.name}</p>
                             </div>
                             <div>
                                 <input placeholder="Search any music" required type="text" className="initial-search"/>

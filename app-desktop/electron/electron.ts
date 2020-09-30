@@ -41,8 +41,13 @@ function createWindow () {
     win.close()
   })
 
-  ipcMain.on('teste', () => {
-    console.log(db.get('user.name').value())
+  ipcMain.on('setToken', (event, args) => {
+    db.set('token', args).write()
+  })
+
+  ipcMain.on('getToken', (event) => {
+    const token = db.get('token').value()
+    event.reply('token', token)
   })
   
 }

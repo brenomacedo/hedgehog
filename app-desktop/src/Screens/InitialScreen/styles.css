@@ -100,8 +100,9 @@
 .initial-profile-pic {
     width: 30px;
     height: 30px;
-    background-color: white;
     border-radius: 15px;
+    background-position: center;
+    background-size: cover;
 }
 
 .initial-search {

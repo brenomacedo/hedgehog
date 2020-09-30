@@ -28,6 +28,7 @@ const Login = () => {
     const history = useHistory()
 
     useEffect(() => {
+        console.log(User.isAuth)
         if(User.isAuth) {
             history.push('/home')
         }
@@ -35,28 +36,26 @@ const Login = () => {
 
     const handleLogin = async () => {
 
-        // try {
-        //     const user = await api.post<IUserContext>('/user/auth', {
-        //         email: emailRef.current?.value,
-        //         password: passwordRef.current?.value
-        //     })
+        try {
+            const user = await api.post<IUserContext>('/user/auth', {
+                email: emailRef.current?.value,
+                password: passwordRef.current?.value
+            })
 
-        //     User.setIsAuth && User.setIsAuth(true)
-        //     User.setId && User.setId(user.data.user.id)
-        //     User.setName && User.setName(user.data.user.name)
-        //     User.setEmail && User.setEmail(user.data.user.email)
-        //     User.setAvatar && User.setAvatar(user.data.user.avatar)
-        //     User.setToken && User.setToken(`Bearer ${user.data.token}`)
+            User.setIsAuth && User.setIsAuth(true)
+            User.setId && User.setId(user.data.user.id)
+            User.setName && User.setName(user.data.user.name)
+            User.setEmail && User.setEmail(user.data.user.email)
+            User.setAvatar && User.setAvatar(user.data.user.avatar)
+            User.setToken && User.setToken(`Bearer ${user.data.token}`)
 
+            ipcRenderer.send('setToken', `Bearer ${user.data.token}`)
             
+            history.push('/home')
             
-        //     history.push('/home')
-            
-        // } catch {
-        //     console.log('error')
-        // }
-
-        ipcRenderer.send('teste')
+        } catch {
+            console.log('error')
+        }
 
     }
 
