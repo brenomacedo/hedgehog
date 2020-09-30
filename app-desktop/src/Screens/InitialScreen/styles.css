@@ -56,7 +56,6 @@
     background-color: var(--banner-background);
     width: 220px;
     height: calc(100vh - 105px);
-    padding: 20px;
 }
 
 .initial-main {
@@ -71,6 +70,20 @@
     font-weight: 300;
     display: flex;
     align-items: center;
+    padding: 15px 20px;
+}
+
+.initial-playlist-bar-my-top {
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.initial-playlist-bar-my:hover {
+    background-color: var(--banner-background-darker);
 }
 
 .initial-playlist-list {

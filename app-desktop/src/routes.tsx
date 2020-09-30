@@ -8,6 +8,7 @@ import Register from './Screens/Register'
 import ResetPassword from './Screens/ResetPassword'
 import api from './api/api'
 import UserContext from './Contexts/UserContext'
+import CreateMusic from './Screens/CreateMusic'
 const { ipcRenderer } = window.require('electron')
 
 const Routes = () => {
@@ -55,6 +56,7 @@ const Routes = () => {
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/forgotpassword' component={ForgotPassword} />
                 <Route exact path='/resetpassword' component={ResetPassword} />
+                <Route exact path='/create-music' component={CreateMusic} />
                 {User.isAuth && (
                     <>
                         <Route exact path='/home' component={InitialScreen} />

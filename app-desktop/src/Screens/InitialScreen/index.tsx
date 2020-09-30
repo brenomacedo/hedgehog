@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { FiSkipBack, FiSkipForward, FiPlayCircle, FiPauseCircle, FiPlusCircle, FiSearch } from 'react-icons/fi'
+import { FiSkipBack, FiSkipForward, FiPlayCircle, FiMusic, FiPlusCircle, FiSearch, FiLogOut } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
+import Bar from '../../Components/Bar'
 import InitialContent from '../../Components/InitialContent'
 import Music from '../../Components/Music'
 import Playlist from '../../Components/Playlist'
@@ -8,6 +9,7 @@ import WindowModal from '../../Components/WindowModal'
 import UserContext from '../../Contexts/UserContext'
 import WindowContext from '../../Contexts/WindowContext'
 import './styles.css'
+const { ipcRenderer } = window.require('electron')
 
 const InitialScreen = () => {
 
@@ -24,28 +26,44 @@ const InitialScreen = () => {
         history.push('/profile')
     }
 
+    const openCreateMusic = () => {
+        ipcRenderer.send('createMusic')
+    }
+
+    const logout = () => {
+        User.setIsAuth && User.setIsAuth(false)
+        ipcRenderer.send('logout')
+        history.push('/')
+    }
+
     return (
-        
+        <>
+        <Bar />
         <div className="initial-container">
             <WindowContext.Provider value={{ modalOpened, offsetX, setModalOpened,
                 setOffsetX, musicId, setMusicId, offsetY, setOffsetY }}>
                 <div className="initial-navigation">
                     <div className="initial-playlist-bar">
-                        <p className="initial-playlist-bar-my">My Playlists</p>
+                        <p className="initial-playlist-bar-my-top">My Playlists</p>
                         <div className="initial-playlist-list">
-
+                        
                         </div>
                         <p style={{ cursor: 'pointer' }} className="initial-playlist-bar-my">
                             Create a playlist
                         <FiPlusCircle style={{ marginLeft: 10 }} color='white' size={20} /></p>
+                        <p style={{ cursor: 'pointer' }} onClick={openCreateMusic} className="initial-playlist-bar-my">
+                            Upload an music
+                        <FiMusic style={{ marginLeft: 10 }} color='white' size={20} /></p>
                     </div>
                     <div className="initial-main">
                         <form className="initial-search-container">
-                            <div className="initial-profile" onClick={handleProfile}>
-                                <div className="initial-profile-pic" style={{
+                            <div className="initial-profile">
+                                <FiLogOut size={20} style={{ marginRight: 20, cursor: 'pointer'}} color='white'
+                                onClick={logout} />
+                                <div onClick={handleProfile} className="initial-profile-pic" style={{
                                     backgroundImage: `url("http://localhost:3333/userimages/${User.avatar}")`
                                 }}></div>
-                                <p className="initial-profile-name">{User.name}</p>
+                                <p onClick={handleProfile} className="initial-profile-name">{User.name}</p>
                             </div>
                             <div>
                                 <input placeholder="Search any music" required type="text" className="initial-search"/>
@@ -82,7 +100,7 @@ const InitialScreen = () => {
                 </div>
             </div>
         </div>
-
+        </>
     )
 }
 

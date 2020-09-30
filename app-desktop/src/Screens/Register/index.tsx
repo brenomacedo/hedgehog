@@ -1,10 +1,13 @@
 import React from 'react'
 import { FiMail, FiKey, FiUser } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
+import Bar from '../../Components/Bar'
 import './styles.css'
 
 const Register = () => {
     return (
+        <>
+        <Bar />
         <div className="login-container">
             <div className="login-banner-container">
                 <div className="login-banner-logo"></div>
@@ -68,6 +71,7 @@ const Register = () => {
                 </form>
             </div>
         </div>
+        </>
     )
 }
 

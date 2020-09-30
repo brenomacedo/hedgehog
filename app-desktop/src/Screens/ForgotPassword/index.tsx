@@ -1,6 +1,7 @@
 import React from 'react'
 import { FiMail, FiKey, FiUser, FiArrowLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
+import Bar from '../../Components/Bar'
 import './styles.css'
 
 const ForgotPassword = () => {
@@ -8,6 +9,8 @@ const ForgotPassword = () => {
     const history = useHistory()
 
     return (
+        <>
+        <Bar />
         <div className="login-container-forgotpassword">
             <div className="login-banner-container">
                 <div className="login-banner-logo"></div>
@@ -35,6 +38,7 @@ const ForgotPassword = () => {
                 </form>
             </div>
         </div>
+        </>
     )
 }
 

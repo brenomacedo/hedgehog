@@ -1,6 +1,7 @@
 import React from 'react'
 import { FiArrowLeft, FiKey, FiCode } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
+import Bar from '../../Components/Bar'
 import './styles.css'
 
 const ResetPassword = () => {
@@ -8,6 +9,8 @@ const ResetPassword = () => {
     const history = useHistory()
 
     return (
+        <>
+        <Bar />
         <div className="login-container-resetpassword">
             <div className="login-banner-container">
                 <div className="login-banner-logo"></div>
@@ -59,6 +62,7 @@ const ResetPassword = () => {
                 </form>
             </div>
         </div>
+        </>
     )
 }
 

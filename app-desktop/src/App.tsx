@@ -18,7 +18,6 @@ function App() {
       id, setId, name, setName, email, setEmail, avatar, setAvatar, token, setToken, isAuth, setIsAuth
     }}>
       <div className="App">
-        <Bar />
         <Routes />
       </div>
     </UserContext.Provider>

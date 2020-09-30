@@ -49,9 +49,28 @@ function createWindow () {
     const token = db.get('token').value()
     event.reply('token', token)
   })
+
+  ipcMain.on('logout', () => {
+    db.set('token', '').write()
+  })
   
   ipcMain.on('showError', (event, args) => {
     dialog.showErrorBox(args.title, args.msg)
+  })
+
+  ipcMain.on('createMusic', (event, args) => {
+
+    const createMusicWin = new BrowserWindow({
+      width: 400,
+      height: 400,
+      webPreferences: {
+        nodeIntegration: true
+      },
+      resizable: false,
+      frame: false
+    })
+
+    createMusicWin.loadURL(isDev ? 'http://localhost:3000/#/create-music' : `file://${path.join(__dirname, "../build/index.html#/create-music")}`)
   })
 
 }

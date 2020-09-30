@@ -3,6 +3,7 @@ import React, { FormEvent, useContext, useReducer, useRef } from 'react'
 import { FiUser, FiKey, FiArrowLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
 import api from '../../api/api'
+import Bar from '../../Components/Bar'
 import UserContext from '../../Contexts/UserContext'
 import './styles.css'
 
@@ -91,6 +92,8 @@ const Profile = () => {
     }
     
     return (
+        <>
+        <Bar />
         <div className="profile-container">
             <FiArrowLeft size={25} color='white' className='arrow-back' onClick={goBack} />
             <label htmlFor="file" className="profile-pic" style={{
@@ -119,6 +122,7 @@ const Profile = () => {
                 </button>
             </form>
         </div>
+        </>
     )
 }
 

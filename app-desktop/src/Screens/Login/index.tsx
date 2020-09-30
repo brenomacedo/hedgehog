@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useRef } from 'react'
 import { FiMail, FiKey } from 'react-icons/fi'
 import { Link, useHistory } from 'react-router-dom'
 import api from '../../api/api'
+import Bar from '../../Components/Bar'
 import UserContext from '../../Contexts/UserContext'
 import './styles.css'
 const { ipcRenderer } = window.require('electron')
@@ -60,6 +61,8 @@ const Login = () => {
     }
 
     return (
+        <>
+        <Bar />
         <div className="login-container">
             <div className="login-banner-container">
                 <div className="login-banner-logo"></div>
@@ -100,6 +103,7 @@ const Login = () => {
                 </form>
             </div>
         </div>
+        </>
     )
 }
 
