@@ -39,7 +39,7 @@ const Profile = () => {
             'image/jpg'
         ]
 
-        if(fileRef.current?.files && allowedTypes.includes(fileRef.current?.files[0].type)) {
+        if(fileRef.current?.files && fileRef.current?.files[0] && allowedTypes.includes(fileRef.current?.files[0].type)) {
             try {
                 const formData = new FormData()
                 formData.append('file', fileRef.current.files[0])
@@ -48,6 +48,7 @@ const Profile = () => {
             } catch {
                 ipcRenderer.send('showError', { title: 'Error', msg: 'Filesize exceeds the limit!' })
             }
+            console.log(fileRef.current?.files[0].type)
             return
         }
 

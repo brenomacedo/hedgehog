@@ -3,6 +3,8 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { key } from '../secret.json'
 import { PrismaClient } from '@prisma/client'
+import path from 'path'
+import fs from 'fs'
 
 const prisma = new PrismaClient()
 
@@ -49,7 +51,23 @@ class UserController {
     async updateUserImage(req: Request, res: Response) {
     
         const { id } = req.params
+
+        const currentuser = await prisma.user.findOne({
+            where: {
+                id: Number(id)
+            }
+        })
+
+        if(!currentuser) {
+            return res.status(500).json({ message: 'unknown user' })
+        }
+
+        const oldAvatar = currentuser.avatar
         
+        if(oldAvatar !== 'default.png') {
+            fs.unlinkSync(path.resolve(__dirname, '..', '..', 'uploads', 'userimages', oldAvatar))
+        }
+
         const user = await prisma.user.update({
             where: {
                 id: Number(id)
