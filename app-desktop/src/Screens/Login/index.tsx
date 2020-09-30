@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import api from '../../api/api'
 import UserContext from '../../Contexts/UserContext'
 import './styles.css'
+const { ipcRenderer } = window.require('electron')
 
 const Login = () => {
 
@@ -34,26 +35,28 @@ const Login = () => {
 
     const handleLogin = async () => {
 
-        try {
-            const user = await api.post<IUserContext>('/user/auth', {
-                email: emailRef.current?.value,
-                password: passwordRef.current?.value
-            })
+        // try {
+        //     const user = await api.post<IUserContext>('/user/auth', {
+        //         email: emailRef.current?.value,
+        //         password: passwordRef.current?.value
+        //     })
 
-            User.setIsAuth && User.setIsAuth(true)
-            User.setId && User.setId(user.data.user.id)
-            User.setName && User.setName(user.data.user.name)
-            User.setEmail && User.setEmail(user.data.user.email)
-            User.setAvatar && User.setAvatar(user.data.user.avatar)
-            User.setToken && User.setToken(`Bearer ${user.data.token}`)
+        //     User.setIsAuth && User.setIsAuth(true)
+        //     User.setId && User.setId(user.data.user.id)
+        //     User.setName && User.setName(user.data.user.name)
+        //     User.setEmail && User.setEmail(user.data.user.email)
+        //     User.setAvatar && User.setAvatar(user.data.user.avatar)
+        //     User.setToken && User.setToken(`Bearer ${user.data.token}`)
 
             
             
-            history.push('/home')
+        //     history.push('/home')
             
-        } catch {
-            console.log('error')
-        }
+        // } catch {
+        //     console.log('error')
+        // }
+
+        ipcRenderer.send('teste')
 
     }
 

@@ -1,7 +1,11 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
 import isDev from 'electron-is-dev'
 import * as path from 'path'
+import low from 'lowdb'
+import FileSync from 'lowdb/adapters/FileSync'
 
+const adapter = new FileSync('db.json')
+const db = low(adapter)
 
 function createWindow () {
   // Cria uma janela de navegação.
@@ -35,6 +39,10 @@ function createWindow () {
 
   ipcMain.on('close', () => {
     win.close()
+  })
+
+  ipcMain.on('teste', () => {
+    console.log(db.get('user.name').value())
   })
   
 }
