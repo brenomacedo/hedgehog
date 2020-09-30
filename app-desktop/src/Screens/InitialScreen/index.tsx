@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { FiSkipBack, FiSkipForward, FiPlayCircle, FiPauseCircle, FiPlusCircle, FiSearch } from 'react-icons/fi'
+import { useHistory } from 'react-router-dom'
 import InitialContent from '../../Components/InitialContent'
 import Music from '../../Components/Music'
 import Playlist from '../../Components/Playlist'
@@ -16,6 +17,12 @@ const InitialScreen = () => {
     const [musicId, setMusicId] = useState(0)
 
     const User = useContext(UserContext)
+
+    const history = useHistory()
+
+    const handleProfile = () => {
+        history.push('/profile')
+    }
 
     return (
         
@@ -34,7 +41,7 @@ const InitialScreen = () => {
                     </div>
                     <div className="initial-main">
                         <form className="initial-search-container">
-                            <div className="initial-profile">
+                            <div className="initial-profile" onClick={handleProfile}>
                                 <div className="initial-profile-pic" style={{
                                     backgroundImage: `url("http://localhost:3333/userimages/${User.avatar}")`
                                 }}></div>

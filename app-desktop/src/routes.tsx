@@ -58,7 +58,7 @@ const Routes = () => {
                 {User.isAuth && (
                     <>
                         <Route exact path='/home' component={InitialScreen} />
-                        <Route exact path='/profile' component={Register} />
+                        <Route exact path='/profile' component={Profile} />
                     </>
                 )}
             </Switch>

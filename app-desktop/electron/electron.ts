@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, dialog } from 'electron'
 import isDev from 'electron-is-dev'
 import * as path from 'path'
 import low from 'lowdb'
@@ -50,6 +50,10 @@ function createWindow () {
     event.reply('token', token)
   })
   
+  ipcMain.on('showError', (event, args) => {
+    dialog.showErrorBox(args.title, args.msg)
+  })
+
 }
 
 // Este método será chamado quando Electron terminar de inicializar

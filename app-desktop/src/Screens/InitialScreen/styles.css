@@ -89,6 +89,7 @@
     padding-left: 20px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .initial-profile-name {
