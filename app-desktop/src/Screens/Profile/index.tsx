@@ -1,5 +1,5 @@
 import Axios from 'axios'
-import React, { FormEvent, useContext, useRef } from 'react'
+import React, { FormEvent, useContext, useReducer, useRef } from 'react'
 import { FiUser, FiKey, FiArrowLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
 import api from '../../api/api'
@@ -10,6 +10,13 @@ const { ipcRenderer } = window.require('electron')
 
 const Profile = () => {
 
+    interface IUser {
+        id: number
+        name: string
+        email: string
+        avatar: string
+    }
+
     const history = useHistory()
 
     const User = useContext(UserContext)
@@ -18,10 +25,35 @@ const Profile = () => {
         history.goBack()
     }
 
+    const fileRef = useRef<HTMLInputElement>(null)
     const nameRef = useRef<HTMLInputElement>(null)
     const newPasswordRef = useRef<HTMLInputElement>(null)
     const confirmNewPasswordRef = useRef<HTMLInputElement>(null)
     const currentPasswordRef = useRef<HTMLInputElement>(null)
+
+    const fileChange = async () => {
+        
+        const allowedTypes = [
+            'image/jpeg',
+            'image/png',
+            'image/jpg'
+        ]
+
+        if(fileRef.current?.files && allowedTypes.includes(fileRef.current?.files[0].type)) {
+            try {
+                const formData = new FormData()
+                formData.append('file', fileRef.current.files[0])
+                const newUser = await api.put<IUser>(`/user/update/image/${User.id}`, formData)
+                User.setAvatar && User.setAvatar(newUser.data.avatar)
+            } catch {
+                ipcRenderer.send('showError', { title: 'Error', msg: 'Filesize exceeds the limit!' })
+            }
+            return
+        }
+
+        ipcRenderer.send('showError', { title: 'Error', msg: 'Image fileType' })
+
+    }
 
     const handleUpdate = async (e: FormEvent) => {
         e.preventDefault()
@@ -60,9 +92,10 @@ const Profile = () => {
     return (
         <div className="profile-container">
             <FiArrowLeft size={25} color='white' className='arrow-back' onClick={goBack} />
-            <div className="profile-pic" style={{
+            <label htmlFor="file" className="profile-pic" style={{
                 backgroundImage: `url("http://localhost:3333/userimages/${User.avatar}")`
-            }}></div>
+            }}></label>
+            <input ref={fileRef} onChange={fileChange} hidden type="file" id="file"/>
             <form onSubmit={handleUpdate} className="profile-form">
                 <div className="profile-form-input">
                     <input ref={nameRef} type="text" placeholder="Name" defaultValue={User.name}/>
