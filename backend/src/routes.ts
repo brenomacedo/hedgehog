@@ -24,4 +24,5 @@ routes.post('/music/create', multer(multerMusicConfig).fields([
     { name: 'image', maxCount: 1 }
 ]), musicController.createMusic)
 routes.get('/music/playlist/:id', musicController.getMusicByPlaylist)
+routes.get('/music/all', musicController.getAllMusics)
 export default routes

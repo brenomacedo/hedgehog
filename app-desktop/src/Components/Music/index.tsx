@@ -5,9 +5,13 @@ import './styles.css'
 
 interface IMusicProps {
     id: number
+    name: string
+    author: string
+    avatar: string
+    url: string
 }
 
-const Music: FC<IMusicProps> = ({ id }) => {
+const Music: FC<IMusicProps> = ({ id, author, avatar, name, url }) => {
 
     useEffect(() => {
         musicRef.current?.addEventListener('click' , e => {
@@ -33,11 +37,13 @@ const Music: FC<IMusicProps> = ({ id }) => {
 
     return (
         <div ref={musicRef} className="music-container" onClick={handleClick}>
-            <div className="music-thumb">
+            <div className="music-thumb" style={{
+                backgroundImage: `url("http://localhost:3333/musicimages/${avatar}")`
+            }}>
 
             </div>
-            <h3 className="music-title">Numb</h3>
-            <p className="music-author">Linkin park</p>
+            <h3 className="music-title">{name}</h3>
+            <p className="music-author">{author}</p>
         </div>
     )
 }

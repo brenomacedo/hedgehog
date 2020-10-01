@@ -39,6 +39,18 @@ class MusicController {
         return res.status(201).json(data)
     }
 
+    async getAllMusics(req: Request, res: Response) {
+        
+        const musics = await prisma.music.findMany({
+            orderBy: {
+                id: "desc"
+            }
+        })
+
+        return res.status(200).json(musics)
+
+    }
+
 }
 
 export default MusicController
