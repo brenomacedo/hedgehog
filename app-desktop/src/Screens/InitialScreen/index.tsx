@@ -30,6 +30,10 @@ const InitialScreen = () => {
         ipcRenderer.send('createMusic')
     }
 
+    const openCreatePlaylist = () => {
+        ipcRenderer.send('createPlaylist')
+    }
+
     const logout = () => {
         User.setIsAuth && User.setIsAuth(false)
         ipcRenderer.send('logout')
@@ -48,7 +52,7 @@ const InitialScreen = () => {
                         <div className="initial-playlist-list">
                         
                         </div>
-                        <p style={{ cursor: 'pointer' }} className="initial-playlist-bar-my">
+                        <p style={{ cursor: 'pointer' }} onClick={openCreatePlaylist} className="initial-playlist-bar-my">
                             Create a playlist
                         <FiPlusCircle style={{ marginLeft: 10 }} color='white' size={20} /></p>
                         <p style={{ cursor: 'pointer' }} onClick={openCreateMusic} className="initial-playlist-bar-my">

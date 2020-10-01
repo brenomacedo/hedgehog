@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useRef } from 'react'
+import React, { FormEvent, useCallback, useContext, useEffect, useRef } from 'react'
 import { FiMail, FiKey } from 'react-icons/fi'
 import { Link, useHistory } from 'react-router-dom'
 import api from '../../api/api'
@@ -35,13 +35,15 @@ const Login = () => {
         }
     }, [User.isAuth])
 
-    const handleLogin = async () => {
-
+    const handleLogin = async (e: FormEvent) => {
+        e.preventDefault()
         try {
             const user = await api.post<IUserContext>('/user/auth', {
                 email: emailRef.current?.value,
                 password: passwordRef.current?.value
             })
+
+            console.log('logged')
 
             User.setIsAuth && User.setIsAuth(true)
             User.setId && User.setId(user.data.user.id)
@@ -72,7 +74,7 @@ const Login = () => {
             <div className="login-form-container">
                 <h2>Login</h2>
                 <p>Hey! Lets get started!</p>
-                <form className="login-form">
+                <form onSubmit={handleLogin} className="login-form">
                     <div style={{
                         position: 'relative'
                     }} className="input-container">
@@ -97,7 +99,7 @@ const Login = () => {
                             <FiKey size={15} color='black' />
                         </div>
                     </div>
-                    <button onClick={handleLogin} type="submit">Login</button>
+                    <button type="submit">Login</button>
                     <Link to='/register' className="link-pointer">Create an account</Link>
                     <Link to='/forgotpassword' className="link-pointer">I forgot my password</Link>
                 </form>
