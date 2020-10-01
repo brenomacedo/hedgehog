@@ -119,7 +119,7 @@ class UserController {
 
         const user = await prisma.user.findOne({
             where: {
-                id: req.body.userId
+                id: Number(req.body.userId)
             }
         })
 

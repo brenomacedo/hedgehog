@@ -22,9 +22,9 @@ class PlaylistController {
 
     async getPlaylistsById(req: Request, res: Response) {
         const { id } = req.params
-        const playlists = await prisma.playlist.findOne({
+        const playlists = await prisma.playlist.findMany({
             where: {
-                id: Number(id)
+                userId: Number(id)
             }
         })
         return res.status(200).json(playlists)

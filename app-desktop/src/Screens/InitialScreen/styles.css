@@ -80,6 +80,7 @@
     display: flex;
     align-items: center;
     padding: 15px 20px;
+    border-bottom: 1px dashed white;
 }
 
 .initial-playlist-bar-my:hover {
@@ -88,6 +89,15 @@
 
 .initial-playlist-list {
     flex: 1;
+    overflow: auto;
+}
+
+.initial-playlist-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.initial-playlist-list::-webkit-scrollbar-thumb {
+    background: var(--background-gray-lighter);
 }
 
 .initial-search-container {
