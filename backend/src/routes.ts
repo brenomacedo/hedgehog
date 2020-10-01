@@ -25,4 +25,5 @@ routes.post('/music/create', multer(multerMusicConfig).fields([
 ]), musicController.createMusic)
 routes.get('/music/playlist/:id', musicController.getMusicByPlaylist)
 routes.get('/music/all', musicController.getAllMusics)
+routes.get('/music/search', musicController.searchMusic)
 export default routes

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FiSkipBack, FiSkipForward, FiPlayCircle, FiMusic, FiPlusCircle, FiSearch, FiLogOut } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
 import api from '../../api/api'
@@ -41,6 +41,8 @@ const InitialScreen = () => {
 
     const User = useContext(UserContext)
     const UserInfo = useContext(UserInfoContext)
+
+    const searchRef = useRef<HTMLInputElement>(null)
     
     useEffect(() => {
         api.get<IPlaylist[]>(`playlist/user/${User.id}`).then(resp => {
@@ -68,6 +70,13 @@ const InitialScreen = () => {
         User.setIsAuth && User.setIsAuth(false)
         ipcRenderer.send('logout')
         history.push('/')
+    }
+
+    const handleSearch = async () => {
+        const musics = await api.get(`/music/search?search=${searchRef.current?.value}`)
+
+        setMusics(musics.data)
+
     }
 
     const loadPlaylists = () => {
@@ -111,8 +120,10 @@ const InitialScreen = () => {
                                     <p onClick={handleProfile} className="initial-profile-name">{User.name}</p>
                                 </div>
                                 <div>
-                                    <input placeholder="Search any music" required type="text" className="initial-search"/>
-                                    <button className="initial-search-button"><FiSearch size={10} color='white' /></button>
+                                    <input ref={searchRef} placeholder="Search any music" required type="text"
+                                    className="initial-search"/>
+                                    <button type="button" onClick={handleSearch}
+                                    className="initial-search-button"><FiSearch size={10} color='white' /></button>
                                 </div>
                             </form>
                             <InitialContent />

@@ -51,6 +51,26 @@ class MusicController {
 
     }
 
+    async searchMusic(req: Request, res: Response) {
+
+        const search = req.query.search
+
+        const musics = await prisma.music.findMany({
+            where: {
+                name: {
+                    contains: String(search),
+                    mode: "insensitive"
+                }
+            },
+            orderBy: {
+                id: "desc"
+            }
+        })
+
+        return res.status(200).json(musics)
+
+    }
+
 }
 
 export default MusicController

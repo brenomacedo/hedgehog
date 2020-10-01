@@ -31,12 +31,10 @@ const Music: FC<IMusicProps> = ({ id, author, avatar, name, url }) => {
     const Window = useContext(WindowContext)
     const musicRef = useRef<HTMLDivElement>(null)
 
-    const handleClick = () => {
-        
-    }
+    
 
     return (
-        <div ref={musicRef} className="music-container" onClick={handleClick}>
+        <div ref={musicRef} className="music-container">
             <div className="music-thumb" style={{
                 backgroundImage: `url("http://localhost:3333/musicimages/${avatar}")`
             }}>
