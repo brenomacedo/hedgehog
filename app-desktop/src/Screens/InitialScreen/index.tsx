@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { FiSkipBack, FiSkipForward, FiPlayCircle, FiMusic, FiPlusCircle, FiSearch, FiLogOut } from 'react-icons/fi'
+import { FiSkipBack, FiSkipForward, FiPlayCircle, FiMusic, FiPlusCircle, FiSearch, FiLogOut, FiArrowLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
 import api from '../../api/api'
 import Bar from '../../Components/Bar'
@@ -38,6 +38,8 @@ const InitialScreen = () => {
     const [musics, setMusics] = useState<IMusic[]>([])
     const [playlists, setPlaylists] = useState<IPlaylist[]>([])
     const [selectedPlaylistMusics, setSelectedPlaylistMusics] = useState<IMusic[]>([])
+
+    const [isInitialScreen, setIsInitialScreen] = useState(true)
 
     const User = useContext(UserContext)
     const UserInfo = useContext(UserInfoContext)
@@ -83,7 +85,7 @@ const InitialScreen = () => {
         return playlists.map(playlist => {
             return (
                 <PlaylistListItem id={playlist.id} key={playlist.id} name={playlist.name}
-                userId={playlist.userId} />
+                userId={playlist.userId} setIsInitialScreen={setIsInitialScreen} />
             )
         })
     }
@@ -120,13 +122,22 @@ const InitialScreen = () => {
                                     <p onClick={handleProfile} className="initial-profile-name">{User.name}</p>
                                 </div>
                                 <div>
-                                    <input ref={searchRef} placeholder="Search any music" required type="text"
-                                    className="initial-search"/>
-                                    <button type="button" onClick={handleSearch}
-                                    className="initial-search-button"><FiSearch size={10} color='white' /></button>
+                                    {isInitialScreen ? (
+                                        <>
+                                            <input ref={searchRef} placeholder="Search any music" required type="text"
+                                            className="initial-search"/>
+                                            <button type="button" onClick={handleSearch}
+                                            className="initial-search-button"><FiSearch size={10} color='white' /></button>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <FiArrowLeft size={25} onClick={() => setIsInitialScreen(true)}
+                                            color='white' style={{ cursor: 'pointer' }} />
+                                        </>
+                                    )}
                                 </div>
                             </form>
-                            <InitialContent />
+                            {isInitialScreen ? <InitialContent /> : <Playlist />}
                         </div>
                     </div>
                     {modalOpened ? (
