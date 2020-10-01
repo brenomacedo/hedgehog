@@ -24,6 +24,9 @@ function createWindow () {
   // e carrega o arquivo index.html do seu aplicativo.
   win.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, "../build/index.html")}`)
 
+  win.on('close', () => {
+    app.quit()
+  })
   // Abrir o DevTools (aba de ferramentas para desenvolvedores).
   ipcMain.on('resize', (event, args) => {
     if(args) {
@@ -71,6 +74,10 @@ function createWindow () {
     })
 
     createMusicWin.loadURL(isDev ? 'http://localhost:3000/#/create-music' : `file://${path.join(__dirname, "../build/index.html#/create-music")}`)
+
+    ipcMain.once('createMusicClose', () => {
+      createMusicWin.close()
+    })
   })
 
 }

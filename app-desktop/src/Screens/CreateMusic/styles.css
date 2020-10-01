@@ -34,10 +34,17 @@
 }
 
 .create-music-pic {
-    height: 100px;
-    width: 100px;
-    background-color: white;
+    width: 300px;
+    height: 34px;
+    background-color: var(--background-gray);
     cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
 }
 
 .create-music-submit {
@@ -52,4 +59,23 @@
     border: 0;
     outline: 0;
     cursor: pointer;
+}
+
+.create-music-close {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background-gray);
+    position: absolute;
+    top: 15px;
+    cursor: pointer;
+    right: 15px;
+}
+
+.create-music-current-file {
+    color: white;
+    font-family: 'Kumbh Sans', sans-serif;
+    margin-top: 12px;
 }
