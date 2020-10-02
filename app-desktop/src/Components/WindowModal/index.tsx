@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import WindowContext from '../../Contexts/WindowContext'
 import './styles.css'
+const { ipcRenderer } = window.require('electron')
 
 const WindowModal = () => {
 
@@ -9,6 +10,14 @@ const WindowModal = () => {
     const addPlaylistBoxRef = useRef<HTMLDivElement>(null)
 
     const Window = useContext(WindowContext)
+
+    useEffect(() => {
+        addPlaylistBoxRef.current?.addEventListener('click', e => {
+            ipcRenderer.send('createAddToPlaylist')
+            Window.setModalOpened && Window.setModalOpened(false)
+        })
+    }, [])
+
     useEffect(() => {
 
         const heightReach = boxRef.current && boxRef.current?.offsetTop + boxRef.current?.offsetHeight
@@ -42,7 +51,7 @@ const WindowModal = () => {
                 <div className="windowBox-option">
                     <p>Tocar agora</p>
                 </div>
-                <div className="windowBox-option">
+                <div className="windowBox-option" ref={addPlaylistBoxRef}>
                     <p>Adicionar à playlist</p>
                 </div>
                 <div className="windowBox-option">

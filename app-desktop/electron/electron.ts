@@ -98,6 +98,25 @@ function createWindow () {
     })
   })
 
+  ipcMain.on('createAddToPlaylist', () => {
+    const addToPlaylistWin = new BrowserWindow({
+      width: 400,
+      height: 500,
+      resizable: false,
+      webPreferences: {
+        nodeIntegration: true
+      },
+      frame: false
+    })
+
+    addToPlaylistWin.loadURL(isDev ? 'http://localhost:3000/#/add-to-playlist' : `file://${path.join(__dirname, "../build/index.html#/add-to-playlist")}`)
+
+    ipcMain.once('addToPlaylistClose', () => {
+      addToPlaylistWin.close()
+    })
+
+  })
+
 }
 
 // Este método será chamado quando Electron terminar de inicializar

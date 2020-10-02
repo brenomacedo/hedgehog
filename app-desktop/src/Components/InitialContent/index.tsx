@@ -11,7 +11,7 @@ const InitialContent = () => {
         api.get('/music/all').then(resp => {
             UserInfo.setMusics && UserInfo.setMusics(resp.data)
         }).catch(err => {})
-    }, [])
+    }, [UserInfo.musics])
 
     const loadMusics = () => {
         return UserInfo.musics.map(music => {

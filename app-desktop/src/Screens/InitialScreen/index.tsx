@@ -35,10 +35,6 @@ const InitialScreen = () => {
     const [offsetY, setOffsetY] = useState(0)
     const [musicId, setMusicId] = useState(0)
 
-    const [musics, setMusics] = useState<IMusic[]>([])
-    const [playlists, setPlaylists] = useState<IPlaylist[]>([])
-    const [selectedPlaylistMusics, setSelectedPlaylistMusics] = useState<IMusic[]>([])
-
     const [isInitialScreen, setIsInitialScreen] = useState(true)
 
     const User = useContext(UserContext)
@@ -48,11 +44,11 @@ const InitialScreen = () => {
     
     useEffect(() => {
         api.get<IPlaylist[]>(`playlist/user/${User.id}`).then(resp => {
-            setPlaylists(resp.data)
+            UserInfo.setPlaylists && UserInfo.setPlaylists(resp.data)
         }).catch(err => {
 
         })
-    }, [])
+    }, [UserInfo.playlists])
 
     const history = useHistory()
 
@@ -77,12 +73,12 @@ const InitialScreen = () => {
     const handleSearch = async () => {
         const musics = await api.get(`/music/search?search=${searchRef.current?.value}`)
 
-        setMusics(musics.data)
+        UserInfo.setMusics && UserInfo.setMusics(musics.data)
 
     }
 
     const loadPlaylists = () => {
-        return playlists.map(playlist => {
+        return UserInfo.playlists.map(playlist => {
             return (
                 <PlaylistListItem id={playlist.id} key={playlist.id} name={playlist.name}
                 userId={playlist.userId} setIsInitialScreen={setIsInitialScreen} />
@@ -96,8 +92,6 @@ const InitialScreen = () => {
         <div className="initial-container">
             <WindowContext.Provider value={{ modalOpened, offsetX, setModalOpened,
                 setOffsetX, musicId, setMusicId, offsetY, setOffsetY }}>
-                <UserInfoContext.Provider value={{ musics, setMusics, playlists, setPlaylists,
-                    selectedPlaylistMusics, setSelectedPlaylistMusics }}>
                     <div className="initial-navigation">
                         <div className="initial-playlist-bar">
                             <p className="initial-playlist-bar-my-top">My Playlists</p>
@@ -143,7 +137,6 @@ const InitialScreen = () => {
                     {modalOpened ? (
                         <WindowModal />
                     ) : false}
-                </UserInfoContext.Provider>
             </WindowContext.Provider>
             <div className="initial-playlist">
                 <p className="initial-playlist-playing-now">

@@ -1,12 +1,22 @@
+import userEvent from '@testing-library/user-event'
 import React, { useContext, useRef } from 'react'
 import { FiX } from 'react-icons/fi'
 import api from '../../api/api'
 import UserContext from '../../Contexts/UserContext'
+import UserInfoContext from '../../Contexts/UserInfoContext'
 const { ipcRenderer } = window.require('electron')
 
 const CreatePlaylist = () => {
 
+    interface ICreatePlaylist {
+        id: number
+        name: string
+        userId: number
+    }
+
     const User = useContext(UserContext)
+    const UserInfo = useContext(UserInfoContext)
+
     const nameRef = useRef<HTMLInputElement>(null)
     
     const handleCreatePlaylistClose = () => {
@@ -19,11 +29,11 @@ const CreatePlaylist = () => {
         }
 
         try {
-            const playlist = await api.post('/playlist/create', {
+            const playlist = await api.post<ICreatePlaylist>('/playlist/create', {
                 name: nameRef.current.value,
                 userId: User.id
             })
-
+            ipcRenderer.send('newPlaylistAdded', playlist.data)
             ipcRenderer.send('createPlaylistClose')
         } catch {
             ipcRenderer.send('showError', { title: 'Error', msg: 'An error ocurred, try again later' })
