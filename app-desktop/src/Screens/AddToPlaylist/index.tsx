@@ -1,18 +1,35 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import api from '../../api/api'
+import UserContext from '../../Contexts/UserContext'
 import UserInfoContext from '../../Contexts/UserInfoContext'
 import './styles.css'
 
 const AddToPlaylist = () => {
 
-    const UserInfo = useContext(UserInfoContext)
+    interface IPlaylist {
+        id: number
+        userId: number
+        name: string
+    }
 
+    const User = useContext(UserContext)
+
+    const [userPlaylists, setUserPlaylists] = useState<IPlaylist[]>([])
+
+    useEffect(() => {
+        api.get<IPlaylist[]>(`/playlist/user/${User.id}`).then(res => {
+            setUserPlaylists(res.data)
+        }).catch(err => {
+
+        })
+    }, [User.id])
 
     const addToPlaylist = (playlistId: number) => {
 
     }
 
     const loadPlaylists = () => {
-        return UserInfo.playlists.map(playlist => {
+        return userPlaylists.map(playlist => {
             return (
                 <div onClick={() => addToPlaylist(playlist.id)} className="add-to-playlist">
                     {playlist.name}
