@@ -1,6 +1,8 @@
 .add-to-container {
-    flex: 1;
+    height: 100vh;
     background-color: var(--banner-background);
+    overflow: auto;
+    position: relative;
 }
 
 .add-to-container h3 {
@@ -8,4 +10,46 @@
     font-family: 'Kumbh Sans', sans-serif;
     text-align: center;
     margin-top: 30px;
+}
+
+.add-to-playlists {
+    overflow: auto;
+    flex: 1;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.add-to-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.add-to-container::-webkit-scrollbar-thumb {
+    background: var(--background-gray-lighter);
+}
+
+.add-to-playlist {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Kumbh Sans', sans-serif;
+    color: white;
+    cursor: pointer;
+}
+
+.add-to-playlist:hover {
+    background-color: var(--banner-background-darker);
+}
+
+.add-to-close {
+    width: 30px;
+    height: 30px;
+    background-color: var(--background-gray);
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }

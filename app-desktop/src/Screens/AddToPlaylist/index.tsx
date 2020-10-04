@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { FiX } from 'react-icons/fi'
 import api from '../../api/api'
 import UserContext from '../../Contexts/UserContext'
-import UserInfoContext from '../../Contexts/UserInfoContext'
 import './styles.css'
+const { ipcRenderer } = window.require('electron')
 
 const AddToPlaylist = () => {
 
@@ -38,8 +39,15 @@ const AddToPlaylist = () => {
         })
     }
 
+    const close = () => {
+        ipcRenderer.send('addToPlaylistClose')
+    }
+
     return (
         <div className="add-to-container">
+            <div className="add-to-close" onClick={close}>
+                <FiX size={25} color='white' />
+            </div>
             <h3>Add To Playlist</h3>
             <div className="add-to-playlists">
                 {loadPlaylists()}
