@@ -34,6 +34,8 @@ const InitialScreen = () => {
     const [offsetX, setOffsetX] = useState(0)
     const [offsetY, setOffsetY] = useState(0)
     const [musicId, setMusicId] = useState(0)
+    const [musicUrl, setMusicUrl] = useState('')
+    const [musicName, setMusicName] = useState('')
 
     const [isInitialScreen, setIsInitialScreen] = useState(true)
 
@@ -91,7 +93,8 @@ const InitialScreen = () => {
         <Bar />
         <div className="initial-container">
             <WindowContext.Provider value={{ modalOpened, offsetX, setModalOpened,
-                setOffsetX, musicId, setMusicId, offsetY, setOffsetY }}>
+                setOffsetX, musicId, setMusicId, offsetY, setOffsetY, musicName, musicUrl,
+                setMusicName, setMusicUrl }}>
                     <div className="initial-navigation">
                         <div className="initial-playlist-bar">
                             <p className="initial-playlist-bar-my-top">My Playlists</p>

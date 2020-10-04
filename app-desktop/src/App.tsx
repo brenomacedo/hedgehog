@@ -31,13 +31,17 @@ function App() {
   const [musics, setMusics] = useState<IMusic[]>([])
   const [playlists, setPlaylists] = useState<IPlaylist[]>([])
   const [selectedPlaylistMusics, setSelectedPlaylistMusics] = useState<IMusic[]>([])
+  const [playingNow, setPlayingNow] = useState('')
+  const [playingNowName, setPlayingNowName] = useState('')
+  const [playingNowId, setPlayingNowId] = useState(0)
 
   return (
     <UserContext.Provider value={{
       id, setId, name, setName, email, setEmail, avatar, setAvatar, token, setToken, isAuth, setIsAuth
     }}>
-    <UserInfoContext.Provider value={{ musics, setMusics, playlists, setPlaylists,
-      selectedPlaylistMusics, setSelectedPlaylistMusics }}>
+    <UserInfoContext.Provider value={{ musics, setMusics, playlists, setPlaylists, playingNow, setPlayingNow,
+      selectedPlaylistMusics, setSelectedPlaylistMusics, playingNowName, setPlayingNowName,
+      setPlayingNowId, playingNowId }}>
     <div className="App">
         <Routes />
       </div>

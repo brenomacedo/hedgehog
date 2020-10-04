@@ -9,6 +9,10 @@ interface IWindowContext {
     setOffsetY: Dispatch<SetStateAction<number>> | null
     musicId: number
     setMusicId: Dispatch<SetStateAction<number>> | null
+    musicUrl: string
+    setMusicUrl: Dispatch<SetStateAction<string>> | null
+    musicName: string
+    setMusicName: Dispatch<SetStateAction<string>> | null
 }
 
 const WindowContext = createContext<IWindowContext>({
@@ -19,7 +23,11 @@ const WindowContext = createContext<IWindowContext>({
     offsetY: 0,
     setOffsetY: null,
     musicId: 0,
-    setMusicId : null
+    setMusicId : null,
+    musicUrl: '',
+    setMusicName: null,
+    musicName: '',
+    setMusicUrl: null
 })
 
 export default WindowContext

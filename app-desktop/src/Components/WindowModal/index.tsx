@@ -1,4 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useRef, useState } from 'react'
+import UserInfoContext from '../../Contexts/UserInfoContext'
 import WindowContext from '../../Contexts/WindowContext'
 import './styles.css'
 const { ipcRenderer } = window.require('electron')
@@ -8,8 +9,10 @@ const WindowModal = () => {
     const modalRef = useRef<HTMLDivElement>(null)
     const boxRef = useRef<HTMLDivElement>(null)
     const addPlaylistBoxRef = useRef<HTMLDivElement>(null)
+    const playnowRef = useRef<HTMLDivElement>(null)
 
     const Window = useContext(WindowContext)
+    const UserInfo = useContext(UserInfoContext)
 
     useEffect(() => {
         if(Window.musicId !== 0) {
@@ -17,7 +20,16 @@ const WindowModal = () => {
                 ipcRenderer.send('createAddToPlaylist', Window.musicId)
                 Window.setModalOpened && Window.setModalOpened(false)
             })
+
+            playnowRef.current?.addEventListener('click', e => {
+                UserInfo.setPlayingNow && UserInfo.setPlayingNow(Window.musicUrl)
+                UserInfo.setPlayingNowName && UserInfo.setPlayingNowName(Window.musicName)
+                UserInfo.setPlayingNowId && UserInfo.setPlayingNowId(Window.musicId)
+
+                Window.setModalOpened && Window.setModalOpened(false)
+            })
         }
+        
     }, [Window.musicId])
 
     useEffect(() => {
@@ -50,7 +62,7 @@ const WindowModal = () => {
                 top: Window.offsetY,
                 left: Window.offsetX
             }}>
-                <div className="windowBox-option">
+                <div ref={playnowRef} className="windowBox-option">
                     <p>Tocar agora</p>
                 </div>
                 <div className="windowBox-option" ref={addPlaylistBoxRef}>

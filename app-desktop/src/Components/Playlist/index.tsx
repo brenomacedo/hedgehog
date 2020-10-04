@@ -7,6 +7,12 @@ const Playlist = () => {
 
     const UserInfo = useContext(UserInfoContext)
 
+    const playNow = (name: string, url: string, id: number) => {
+        UserInfo.setPlayingNow && UserInfo.setPlayingNow(url)
+        UserInfo.setPlayingNowName && UserInfo.setPlayingNowName(name)
+        UserInfo.setPlayingNowId && UserInfo.setPlayingNowId(id)
+    }
+
     const loadPlaylistItems = () => {
         return UserInfo.selectedPlaylistMusics.map(item => {
             return (
@@ -14,8 +20,8 @@ const Playlist = () => {
                     <p className="playlist-music-name">{item.name} -</p>
                     <p className="playlist-music-author">{item.author}</p>
                     <p className="playlist-music-duration">3:52</p>
-                    <p className="playlist-music-playing-now">Playing Now!</p>
-                    <FiPlay className="playlist-music-play" size={20} color='white' />
+                    {UserInfo.playingNowId === item.id ? <p className="playlist-music-playing-now">Playing Now!</p> : false}
+                    <FiPlay onClick={() => playNow(item.name, item.url, item.id)} className="playlist-music-play" size={20} color='white' />
                 </div>
             )
         })

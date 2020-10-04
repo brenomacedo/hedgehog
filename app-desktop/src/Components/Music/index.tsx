@@ -23,6 +23,8 @@ const Music: FC<IMusicProps> = ({ id, author, avatar, name, url }) => {
 
             
             
+            Window.setMusicName && Window.setMusicName(name)
+            Window.setMusicUrl && Window.setMusicUrl(url)
             Window.setMusicId && Window.setMusicId(id)
             
         })

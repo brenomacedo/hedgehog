@@ -21,6 +21,12 @@ interface IUserInfoContext {
     setPlaylists: Dispatch<SetStateAction<IPlaylist[]>> | null
     selectedPlaylistMusics: IMusic[]
     setSelectedPlaylistMusics: Dispatch<SetStateAction<IMusic[]>> | null
+    playingNow: string
+    setPlayingNow: Dispatch<SetStateAction<string>> | null
+    playingNowName: string
+    setPlayingNowName: Dispatch<SetStateAction<string>> | null
+    playingNowId: number
+    setPlayingNowId: Dispatch<SetStateAction<number>> | null
 }
 
 const UserInfoContext = createContext<IUserInfoContext>({
@@ -29,7 +35,13 @@ const UserInfoContext = createContext<IUserInfoContext>({
     playlists: [],
     setPlaylists: null,
     selectedPlaylistMusics: [],
-    setSelectedPlaylistMusics: null
+    setSelectedPlaylistMusics: null,
+    playingNow: '',
+    setPlayingNow: null,
+    playingNowName: '',
+    setPlayingNowName: null,
+    playingNowId: 0,
+    setPlayingNowId: null
 })
 
 export default UserInfoContext
