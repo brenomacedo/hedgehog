@@ -14,6 +14,7 @@ const InitialPlaylist = () => {
 
     const audioRef = useRef<HTMLAudioElement>(null)
     const volumeBarRef = useRef<HTMLDivElement>(null)
+    const progressBarRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
 
@@ -21,6 +22,13 @@ const InitialPlaylist = () => {
             volumeBarRef.current && setVolume((e.pageX - volumeBarRef.current?.offsetLeft) / volumeBarRef.current.offsetWidth)
             if(volumeBarRef.current && audioRef.current?.volume) {
                 audioRef.current.volume = (e.pageX - volumeBarRef.current?.offsetLeft) / volumeBarRef.current.offsetWidth
+            }
+        })
+
+        progressBarRef.current?.addEventListener('click', e => {
+            if(progressBarRef.current && audioRef.current?.volume) {
+                let progress = (e.pageX - progressBarRef.current?.offsetLeft) / progressBarRef.current.offsetWidth
+                audioRef.current.currentTime = progress * audioRef.current.duration
             }
         })
 
@@ -79,8 +87,8 @@ const InitialPlaylist = () => {
                 </div>
                 <div className="initial-playlist-progress-bar">
                     <p className="initial-playlist-progress-bar-info">{currentTime}</p>
-                    <div className="initial-playlist-progress-bar-bar">
-                        <div style={{ left: 100*progress }} className="initial-playlist-brogress-bar-ball"></div>
+                    <div ref={progressBarRef} className="initial-playlist-progress-bar-bar">
+                        <div style={{ left: 200*progress }} className="initial-playlist-brogress-bar-ball"></div>
                     </div>
                     <p className="initial-playlist-progress-bar-info">{duration}</p>
                 </div>
