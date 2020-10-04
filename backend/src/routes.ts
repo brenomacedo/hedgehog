@@ -18,6 +18,7 @@ routes.get('/user/token', AuthMiddleware, userController.verifyToken)
 routes.put('/user/update/image/:id', multer(multerUserConfig).single('file'), userController.updateUserImage)
 routes.put('/user/update/data/:id', userController.updateUser)
 routes.post('/playlist/create', playlistController.createPlaylist)
+routes.post('/playlist/music', playlistController.addMusicToPlaylist)
 routes.get('/playlist/user/:id', playlistController.getPlaylistsById)
 routes.post('/music/create', multer(multerMusicConfig).fields([
     { name: 'music', maxCount: 1 },

@@ -12,11 +12,13 @@ const WindowModal = () => {
     const Window = useContext(WindowContext)
 
     useEffect(() => {
-        addPlaylistBoxRef.current?.addEventListener('click', e => {
-            ipcRenderer.send('createAddToPlaylist')
-            Window.setModalOpened && Window.setModalOpened(false)
-        })
-    }, [])
+        if(Window.musicId !== 0) {
+            addPlaylistBoxRef.current?.addEventListener('click', e => {
+                ipcRenderer.send('createAddToPlaylist', Window.musicId)
+                Window.setModalOpened && Window.setModalOpened(false)
+            })
+        }
+    }, [Window.musicId])
 
     useEffect(() => {
 

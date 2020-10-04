@@ -98,13 +98,14 @@ function createWindow () {
     })
   })
 
-  ipcMain.on('createAddToPlaylist', () => {
+  ipcMain.on('createAddToPlaylist', (event, args) => {
     const addToPlaylistWin = new BrowserWindow({
       width: 400,
       height: 500,
       resizable: false,
       webPreferences: {
-        nodeIntegration: true
+        nodeIntegration: true,
+        additionalArguments: [`${args}`]
       },
       frame: false
     })

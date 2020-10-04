@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { FiX } from 'react-icons/fi'
 import api from '../../api/api'
 import UserContext from '../../Contexts/UserContext'
@@ -17,6 +17,8 @@ const AddToPlaylist = () => {
 
     const [userPlaylists, setUserPlaylists] = useState<IPlaylist[]>([])
 
+    const musicId = useMemo(() => Number(window.process.argv[window.process.argv.length - 1]), [])
+
     useEffect(() => {
         api.get<IPlaylist[]>(`/playlist/user/${User.id}`).then(res => {
             setUserPlaylists(res.data)
@@ -25,8 +27,18 @@ const AddToPlaylist = () => {
         })
     }, [User.id])
 
-    const addToPlaylist = (playlistId: number) => {
+    const addToPlaylist = async (playlistId: number) => {
+        try {
+            await api.post('/playlist/music', {
+                musicId,
+                playlistId
+            })
 
+            ipcRenderer.send('addToPlaylistClose')
+        } catch {
+            ipcRenderer.send('showError', { title: 'Error', msg: 'An error ocurred' })
+            ipcRenderer.send('addToPlaylistClose')
+        }
     }
 
     const loadPlaylists = () => {

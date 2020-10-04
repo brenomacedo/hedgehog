@@ -30,6 +30,27 @@ class PlaylistController {
         return res.status(200).json(playlists)
     }
 
+    async addMusicToPlaylist(req: Request, res: Response) {
+        const { playlistId, musicId } = req.body
+
+        const PlaylistToMusic = await prisma.playlistToMusic.create({
+            data: {
+                Music: {
+                    connect: {
+                        id: musicId
+                    }
+                },
+                Playlist: {
+                    connect: {
+                        id: playlistId
+                    }
+                }
+            }
+        })
+
+        return res.status(200).json(PlaylistToMusic)
+    }
+
 }
 
 export default PlaylistController
