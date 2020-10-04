@@ -1,16 +1,29 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FiPause, FiPauseCircle, FiPlayCircle } from 'react-icons/fi'
+import UserInfoContext from '../../Contexts/UserInfoContext'
 
 const InitialPlaylist = () => {
+
+    const UserInfo = useContext(UserInfoContext)
 
     const [isPlaying, setIsPlaying] = useState(false)
     const [currentTime, setCurrentTime] = useState('0:00')
     const [duration, setDuration] = useState('')
     const [progress, setProgress] = useState(0)
+    const [volume, setVolume] = useState(1)
 
     const audioRef = useRef<HTMLAudioElement>(null)
+    const volumeBarRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
+
+        volumeBarRef.current?.addEventListener('click', e => {
+            volumeBarRef.current && setVolume((e.pageX - volumeBarRef.current?.offsetLeft) / volumeBarRef.current.offsetWidth)
+            if(volumeBarRef.current && audioRef.current?.volume) {
+                audioRef.current.volume = (e.pageX - volumeBarRef.current?.offsetLeft) / volumeBarRef.current.offsetWidth
+            }
+        })
+
         audioRef.current?.addEventListener('timeupdate', e => {
             const currentTime = audioRef.current?.currentTime
             const duration = audioRef.current?.duration
@@ -54,7 +67,7 @@ const InitialPlaylist = () => {
     return (
         <div className="initial-playlist">
             <p className="initial-playlist-playing-now">
-                Linkin Park - Figure 09
+                {UserInfo.playingNowName}
             </p>
             <div className="initial-playlist-controls-and-bar">
                 <div className="initial-playlist-controls">
@@ -67,16 +80,16 @@ const InitialPlaylist = () => {
                 <div className="initial-playlist-progress-bar">
                     <p className="initial-playlist-progress-bar-info">{currentTime}</p>
                     <div className="initial-playlist-progress-bar-bar">
-                        <div className="initial-playlist-brogress-bar-ball"></div>
+                        <div style={{ left: 100*progress }} className="initial-playlist-brogress-bar-ball"></div>
                     </div>
                     <p className="initial-playlist-progress-bar-info">{duration}</p>
                 </div>
             </div>
-            <div className="initial-playlist-volume">
-                <div className="initial-playlist-volume-ball"></div>
+            <div ref={volumeBarRef} className="initial-playlist-volume">
+                <div style={{ left: 100*volume }} className="initial-playlist-volume-ball"></div>
             </div>
-            <audio ref={audioRef}>
-                <source src="http://localhost:3333/music/2f4d226017cf180bfda720985929df1b-bensound-dubstep.mp3"></source>
+            <audio src={`http://localhost:3333/music/${UserInfo.playingNow}`} ref={audioRef}>
+                <source src={UserInfo.playingNow}></source>
             </audio>
         </div>
     )
