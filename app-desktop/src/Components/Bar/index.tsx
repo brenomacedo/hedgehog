@@ -26,17 +26,10 @@ const Bar = () => {
         ipcRenderer.send('close')
     }
 
-    const debug = () => {
-        UserInfo.setPlaylists && UserInfo.setPlaylists([])
-    }
-
     return (
         <div className="bar-container">
             <h3 className="bar-title">Hedgehog</h3>
             <div className="bar-options">
-                <div className="bar-option" onClick={debug}>
-                    <FiMinus size={20} color='white' />
-                </div>
                 <div className="bar-option" onClick={handleMinimize}>
                     <FiMinus size={20} color='white' />
                 </div>
