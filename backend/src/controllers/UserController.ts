@@ -14,6 +14,16 @@ class UserController {
 
         const { name, email, password: unhashedPassword } = req.body
 
+        const verifyUser = await prisma.user.findOne({
+            where: {
+                email
+            }
+        })
+
+        if(verifyUser) {
+            return res.status(500).json({ msg: 'Email already exists!' })
+        }
+
         const password = await bcrypt.hash(unhashedPassword, 10)
 
         const user = await prisma.user.create({
