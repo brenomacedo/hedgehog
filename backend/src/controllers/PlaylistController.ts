@@ -51,6 +51,26 @@ class PlaylistController {
         return res.status(200).json(PlaylistToMusic)
     }
 
+    async deletePlaylist(req: Request, res: Response) {
+
+        const { id } = req.params
+
+        await prisma.playlistToMusic.deleteMany({
+            where: {
+                playlistId: Number(id)
+            }
+        })
+
+        await prisma.playlist.delete({
+            where: {
+                id: Number(id)
+            }
+        })
+
+        return res.status(200).json({ msg: "playlist successfully deleted" })
+
+    }
+
 }
 
 export default PlaylistController

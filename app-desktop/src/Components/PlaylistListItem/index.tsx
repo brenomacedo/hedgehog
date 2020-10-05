@@ -1,7 +1,9 @@
 import React, { Dispatch, FC, SetStateAction, useContext } from 'react'
 import api from '../../api/api'
 import UserInfoContext from '../../Contexts/UserInfoContext'
+import { FiTrash } from 'react-icons/fi'
 import './styles.css'
+const { ipcRenderer } = window.require('electron')
 
 interface PlaylistListItemProps {
     id: number
@@ -45,9 +47,22 @@ const PlaylistListItem: FC<PlaylistListItemProps> = ({ id, name, userId, setIsIn
         }
     }
 
+    const deletePlaylist = async (playlistId: number) => {
+        try {
+            await api.delete(`/playlist/delete/${playlistId}`)
+        } catch {
+            ipcRenderer.send('showMessage', { title: 'Error', msg: 'Error ocurrent while deleting your message' })
+        }
+    }
+
     return (
-        <div onClick={handlePlaylist} className="initial-playlist-list-item">
-            {name}
+        <div className="initial-playlist-list-item">
+            <div onClick={handlePlaylist} className="initial-playlist-list-item-name">
+                {name}
+            </div>
+            <div onClick={() => deletePlaylist(id)} className="delete-playlist">
+                <FiTrash size={20} color='white' />
+            </div>
         </div>
     )
 }
