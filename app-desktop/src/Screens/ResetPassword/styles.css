@@ -9,15 +9,3 @@
     left: 20px;
     cursor: pointer;
 }
-
-/* Chrome, Safari, Edge, Opera */
-input.inputnumber::-webkit-outer-spin-button,
-input.inputnumber::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input.inputnumber[type=number] {
-  -moz-appearance: textfield;
-}

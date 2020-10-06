@@ -55,11 +55,11 @@ const Routes = () => {
     return (
         <HashRouter>
             <Switch>
-                <Route exact path='/' component={Success} />
-                <Route exact path='/test' component={Login} />
+                <Route exact path='/' component={Login} />
+                <Route exact path='/success' component={Success} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/forgotpassword' component={ForgotPassword} />
-                <Route exact path='/resetpassword' component={ResetPassword} />
+                <Route exact path='/resetpassword/:email' component={ResetPassword} />
                 <Route exact path='/create-music' component={CreateMusic} />
                 <Route exact path='/create-playlist' component={CreatePlaylist} />
                 <Route exact path='/add-to-playlist' component={AddToPlaylist} />

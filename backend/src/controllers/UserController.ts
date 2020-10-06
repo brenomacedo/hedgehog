@@ -1,11 +1,13 @@
 import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import { key } from '../secret.json'
 import { PrismaClient } from '@prisma/client'
 import path from 'path'
 import fs from 'fs'
 import crypto from 'crypto'
+import nodemailer from 'nodemailer'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const prisma = new PrismaClient()
 
@@ -54,7 +56,7 @@ class UserController {
             return res.status(500).json({ error: "Email or password incorrects!" })
         }
 
-        const token = jwt.sign({ id: user.id }, key, { expiresIn: 86400 })
+        const token = jwt.sign({ id: user.id }, String(process.env.AUTH), { expiresIn: 86400 })
 
         return res.status(200).json({ user: {...user, password: undefined }, token })
     }
@@ -155,14 +157,34 @@ class UserController {
         const data = new Date()
         data.setHours(data.getHours() + 1)
 
+        const resetToken = crypto.randomBytes(8).toString('hex').toLocaleUpperCase()
+
         const newUser = await prisma.user.update({
             where: {
                 email
             },
             data: {
-                resetToken: crypto.randomBytes(8).toString('hex').toLocaleUpperCase(),
+                resetToken,
                 expiresIn: Number(data)
             }
+        })
+
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            secure: false,
+            port: 587,
+            auth: {
+                user: process.env.USER,
+                pass: process.env.PASS
+            }
+        })
+
+        await transporter.sendMail({
+            from: '"Hedgehog" <brenomacedo5432@gmail.com>',
+            to: email,
+            subject: 'Password redefinition - Hedgehog',
+            text: `Use this token to recover your password: ${resetToken}`,
+            html: `<h1>Use this token to recover your password: ${resetToken}</h1>`
         })
 
         return res.status(200).json({ ...newUser, password: undefined })
@@ -184,6 +206,15 @@ class UserController {
         }
 
         if(token !== user?.resetToken) {
+            await prisma.user.update({
+                data: {
+                    expiresIn: null,
+                    resetToken: null
+                },
+                where: {
+                    email
+                }
+            })
             return res.status(500).json({ msg: 'invalid token!' })
         }
 

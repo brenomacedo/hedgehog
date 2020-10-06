@@ -1,16 +1,33 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, useEffect, useRef } from 'react'
 import { FiMail, FiKey, FiUser, FiArrowLeft } from 'react-icons/fi'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
+import api from '../../api/api'
 import Bar from '../../Components/Bar'
 import './styles.css'
+const { ipcRenderer } = window.require('electron')
 
 const ForgotPassword = () => {
     
     const history = useHistory()
+    
+    const emailRef = useRef<HTMLInputElement>(null)
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
-        history.push('resetpassword')
+
+        if(!emailRef.current?.value) {
+            return ipcRenderer.send('showError', { title: 'Error', msg: 'Type your email!' })
+        }
+
+        try {
+            await api.put('/password/token', {
+                email: emailRef.current.value
+            })
+
+            history.push(`resetpassword/${emailRef.current.value}`)
+        } catch {
+            return ipcRenderer.send('showError', { title: 'Error', msg: 'Invalid email!' })
+        }
     }
 
     return (
@@ -30,7 +47,7 @@ const ForgotPassword = () => {
                     <div style={{
                         position: 'relative'
                     }} className="input-container">
-                        <input type="text" placeholder="Your email" />
+                        <input ref={emailRef} type="text" placeholder="Your email" />
                         <div style={{
                             position: 'absolute',
                             top: 10,

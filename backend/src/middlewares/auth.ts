@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from 'express'
-import { key } from '../secret.json'
 import jwt, { DecodeOptions } from 'jsonwebtoken'
 
 const AuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
@@ -18,7 +17,7 @@ const AuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
         return res.status(500).json({ error: "Invalid token format!" })
     }
 
-    jwt.verify(headerStringArray[1], key, (err, decoded: any) => {
+    jwt.verify(headerStringArray[1], String(process.env.AUTH), (err, decoded: any) => {
         if(err) {
             return res.status(500).json({ error: "Invalid token!" })
         }
