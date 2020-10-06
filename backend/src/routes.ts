@@ -28,4 +28,6 @@ routes.post('/music/create', multer(multerMusicConfig).fields([
 routes.get('/music/playlist/:id', musicController.getMusicByPlaylist)
 routes.get('/music/all', musicController.getAllMusics)
 routes.get('/music/search', musicController.searchMusic)
+routes.put('/password/token', userController.setRecoverToken)
+routes.put('/password/reset', userController.resetPassword)
 export default routes

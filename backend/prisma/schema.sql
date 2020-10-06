@@ -5,7 +5,7 @@ CREATE TABLE "public"."User" (
     password VARCHAR(255) NOT NULL,
     avatar VARCHAR(255) NOT NULL DEFAULT 'default.png',
     "resetToken" VARCHAR(255),
-    "expiresIn" INTEGER
+    "expiresIn" BIGINT
 );
 
 CREATE TABLE "public"."Playlist" (

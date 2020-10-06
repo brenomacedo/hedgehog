@@ -5,6 +5,7 @@ import { key } from '../secret.json'
 import { PrismaClient } from '@prisma/client'
 import path from 'path'
 import fs from 'fs'
+import crypto from 'crypto'
 
 const prisma = new PrismaClient()
 
@@ -135,6 +136,81 @@ class UserController {
 
         return res.status(200).json({ ...user, password: undefined })
         
+    }
+
+    async setRecoverToken(req: Request, res: Response) {
+
+        const { email } = req.body
+
+        const user = await prisma.user.findOne({
+            where: {
+                email
+            }
+        })
+
+        if(!user) {
+            return res.status(500).json({ msg: 'Email not found!' })
+        }
+
+        const data = new Date()
+        data.setHours(data.getHours() + 1)
+
+        const newUser = await prisma.user.update({
+            where: {
+                email
+            },
+            data: {
+                resetToken: crypto.randomBytes(8).toString('hex').toLocaleUpperCase(),
+                expiresIn: Number(data)
+            }
+        })
+
+        return res.status(200).json({ ...newUser, password: undefined })
+
+    }
+
+    async resetPassword(req: Request, res: Response) {
+
+        const { email, password: newPassword, token } = req.body
+
+        const user = await prisma.user.findOne({
+            where: {
+                email
+            }
+        })
+
+        if(!user) {
+            return res.status(500).json({ msg: 'invalid user' })
+        }
+
+        if(token !== user?.resetToken) {
+            return res.status(500).json({ msg: 'invalid token!' })
+        }
+
+        if(!user.expiresIn) {
+            return res.status(500).json({ msg: 'token is not set' })
+        }
+
+        const test = new Date()
+        test.setHours(test.getHours() + 1)
+
+        if(Date.now() > user?.expiresIn) {
+            return res.status(500).json({ current: Date.now(), expires: Number(test) })
+        }
+
+        const password = await bcrypt.hash(newPassword, 10)
+
+        const newUser = await prisma.user.update({
+            where: {
+                email
+            },
+            data: {
+                password
+            }
+        })
+
+        return res.status(200).json({ msg: 'password updated!' })
+
     }
 
 }
