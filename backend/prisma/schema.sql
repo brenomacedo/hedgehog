@@ -3,7 +3,9 @@ CREATE TABLE "public"."User" (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    avatar VARCHAR(255) NOT NULL DEFAULT 'default.png'
+    avatar VARCHAR(255) NOT NULL DEFAULT 'default.png',
+    "resetToken" VARCHAR(255),
+    "expiresIn" INTEGER
 );
 
 CREATE TABLE "public"."Playlist" (

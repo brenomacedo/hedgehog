@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 import { FiMail, FiKey, FiUser, FiArrowLeft } from 'react-icons/fi'
 import { useHistory } from 'react-router-dom'
 import Bar from '../../Components/Bar'
@@ -8,20 +8,25 @@ const ForgotPassword = () => {
     
     const history = useHistory()
 
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault()
+        history.push('resetpassword')
+    }
+
     return (
         <>
         <Bar />
         <div className="login-container-forgotpassword">
             <div className="login-banner-container">
                 <div className="login-banner-logo"></div>
-                <h2>Welcome to hedgehog!</h2>
-                <p>You can reset your password here!</p>
+                <h2>Did you forget your password?</h2>
+                <p>No problem! Follow these steps to recover it!</p>
             </div>
             <div className="login-form-container">
-                <FiArrowLeft onClick={() => history.push('/')} className="arrow-back" size={25} color='white' />
+                <FiArrowLeft onClick={() => history.goBack()} className="arrow-back" size={25} color='white' />
                 <h2>Reset password</h2>
-                <p>Don't worry! We will solve your problem!</p>
-                <form className="login-form">
+                <p>Type your email to send an verification email!</p>
+                <form onSubmit={handleSubmit} className="login-form">
                     <div style={{
                         position: 'relative'
                     }} className="input-container">

@@ -11,6 +11,7 @@ import UserContext from './Contexts/UserContext'
 import CreateMusic from './Screens/CreateMusic'
 import CreatePlaylist from './Screens/CreatePlaylist'
 import AddToPlaylist from './Screens/AddToPlaylist'
+import Success from './Screens/Success'
 const { ipcRenderer } = window.require('electron')
 
 const Routes = () => {
@@ -54,7 +55,8 @@ const Routes = () => {
     return (
         <HashRouter>
             <Switch>
-                <Route exact path='/' component={Login} />
+                <Route exact path='/' component={Success} />
+                <Route exact path='/test' component={Login} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/forgotpassword' component={ForgotPassword} />
                 <Route exact path='/resetpassword' component={ResetPassword} />

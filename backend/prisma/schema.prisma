@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Music {
-  id              Int               @default(autoincrement()) @id
+  id              Int               @id @default(autoincrement())
   name            String
   author          String
   avatar          String            @default("default-music.png")
@@ -17,7 +17,7 @@ model Music {
 }
 
 model Playlist {
-  id              Int               @default(autoincrement()) @id
+  id              Int               @id @default(autoincrement())
   name            String
   userId          Int
   User            User              @relation(fields: [userId], references: [id])
@@ -34,10 +34,12 @@ model PlaylistToMusic {
 }
 
 model User {
-  id       Int        @default(autoincrement()) @id
-  name     String
-  email    String     @unique
-  password String
-  avatar   String     @default("default.png")
-  Playlist Playlist[]
+  id         Int        @id @default(autoincrement())
+  name       String
+  email      String     @unique
+  password   String
+  avatar     String     @default("default.png")
+  resetToken String?
+  expiresIn  Int?
+  Playlist   Playlist[]
 }
